@@ -42,3 +42,18 @@ export const updatePost = async (req, res) => {
         res.status(500).json({"error": err.message});
     }
 }
+
+export const deletePost = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const existingPost = await Post.findOne({_id: id});
+        if(existingPost.author.toString() !== req.userId) return res.status(400).json({"error": "Access Denied !!"});
+
+        await Post.deleteOne({_id: id});
+
+        res.status(200).json({"success": "Post deleted successfully !!"});
+    } catch (err) {
+        res.status(500).json({"error": err.message});
+    }
+}
