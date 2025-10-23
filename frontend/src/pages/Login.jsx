@@ -13,7 +13,7 @@ export default function Login() {
 
             const token = response.data.token;
             const userId = response.data.user.id;
-            
+
             localStorage.setItem("token", token);
             localStorage.setItem("userId", userId);
 
@@ -26,7 +26,7 @@ export default function Login() {
     return (
         <div className="login-box">
             <h1>Login</h1>
-            <form method="post" onSubmit={loginUser}>
+            <form method="post" onSubmit={loginUser} className="login-form">
                 <input type="email" value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your Email address : " required />

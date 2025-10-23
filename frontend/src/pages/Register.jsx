@@ -19,7 +19,7 @@ export default function Register() {
     return (
         <div className="register-box">
             <h1>Register</h1>
-            <form method="post" onSubmit={registerUser}>
+            <form method="post" onSubmit={registerUser} className="register-form">
                 <input type="text" value={username}
                 onChange={(e) => {
                     setUsername(e.target.value);
