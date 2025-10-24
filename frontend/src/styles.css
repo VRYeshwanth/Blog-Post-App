@@ -8,11 +8,46 @@
 }
 
 #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: calc(100vh - 80px);
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    height: 80px;
+}
+
+.logo {
+    cursor: pointer;
+}
+.logo > h1 {
+    font-size: 2rem;
+}
+
+.nav-btns {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-btns button {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    cursor: pointer;
 }
 
 /* Register Page */

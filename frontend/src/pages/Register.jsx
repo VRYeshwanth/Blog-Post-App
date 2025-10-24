@@ -17,29 +17,31 @@ export default function Register() {
     }
 
     return (
-        <div className="register-box">
-            <h1>Register</h1>
-            <form method="post" onSubmit={registerUser} className="register-form">
-                <input type="text" value={username}
-                onChange={(e) => {
-                    setUsername(e.target.value);
-                }}
-                placeholder="Enter your Username : " required/>
+        <div className="page-container">
+            <div className="register-box">
+                <h1>Register</h1>
+                <form method="post" onSubmit={registerUser} className="register-form">
+                    <input type="text" value={username}
+                    onChange={(e) => {
+                        setUsername(e.target.value);
+                    }}
+                    placeholder="Enter your Username : " required/>
 
-                <input type="email" value={email}
-                onChange={(e) => {
-                    setEmail(e.target.value);
-                }}
-                placeholder="Enter your email address : " required/>
+                    <input type="email" value={email}
+                    onChange={(e) => {
+                        setEmail(e.target.value);
+                    }}
+                    placeholder="Enter your email address : " required/>
 
-                <input type="password" value={password}
-                onChange={(e) => {
-                    setPassword(e.target.value);
-                }}
-                placeholder="Enter your password : " required/>
+                    <input type="password" value={password}
+                    onChange={(e) => {
+                        setPassword(e.target.value);
+                    }}
+                    placeholder="Enter your password : " required/>
 
-                <button type="submit">Register</button>
-            </form>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
         </div>
     )
 }

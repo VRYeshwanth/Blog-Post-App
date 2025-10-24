@@ -24,19 +24,21 @@ export default function Login() {
     }
     
     return (
-        <div className="login-box">
-            <h1>Login</h1>
-            <form method="post" onSubmit={loginUser} className="login-form">
-                <input type="email" value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your Email address : " required />
+        <div className="page-container">
+            <div className="login-box">
+                <h1>Login</h1>
+                <form method="post" onSubmit={loginUser} className="login-form">
+                    <input type="email" value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your Email address : " required />
 
-                <input type="password" value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password : " required />
+                    <input type="password" value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password : " required />
 
-                <button type="submit">Login</button>
-            </form>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
         </div>
     )
 }
