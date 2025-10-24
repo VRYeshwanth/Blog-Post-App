@@ -9,7 +9,10 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post(`http://localhost:3000/api/auth/login`, {email: email, password: password});
+            const response = await axios.post(
+                `http://localhost:3000/api/auth/login`,
+                { email: email, password: password }
+            );
 
             const token = response.data.token;
             const userId = response.data.user.id;
@@ -22,23 +25,31 @@ export default function Login() {
             alert(err.response.data.error);
         }
     }
-    
+
     return (
         <div className="page-container">
             <div className="login-box">
                 <h1>Login</h1>
                 <form method="post" onSubmit={loginUser} className="login-form">
-                    <input type="email" value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your Email address : " required />
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your Email address : "
+                        required
+                    />
 
-                    <input type="password" value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password : " required />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter your password : "
+                        required
+                    />
 
                     <button type="submit">Login</button>
                 </form>
             </div>
         </div>
-    )
+    );
 }
