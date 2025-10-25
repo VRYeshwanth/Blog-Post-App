@@ -16,15 +16,21 @@ export default function HomePage() {
             <div className="posts">
                 {posts.map((post) => (
                     <div className="post" key={post._id}>
-                        <h1 className="blog-title">{post.title}</h1>
-                        <p className="blog-content">{post.content}</p>
+                        <h2 className="blog-title">{post.title}</h2>
+                        <p className="blog-content">
+                            {post.content.length > 150
+                                ? post.content.substring(0, 150) + "..."
+                                : post.content}
+                        </p>
                         <div className="post-footer">
-                            <div className="author-placeholder">
-                                <h3>Author: {post.author}</h3>
+                            <div className="footer-btns">
+                                <button className="read-more">Read More</button>
                             </div>
-                            <div className="timestamps">
-                                <h3>Created At: {post.createdAt}</h3>
-                                <h3>Updated At: {post.updatedAt}</h3>
+                            <div className="footer-metadata">
+                                <h3>Author : {post.author}</h3>
+                                <small>Created At : {post.createdAt}</small>
+                                <br />
+                                <small>Updated At : {post.updatedAt}</small>
                             </div>
                         </div>
                     </div>
