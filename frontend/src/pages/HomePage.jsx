@@ -27,7 +27,7 @@ export default function HomePage() {
                                 <button className="read-more">Read More</button>
                             </div>
                             <div className="footer-metadata">
-                                <h3>Author : {post.author}</h3>
+                                <h3>Author : {post.author.username}</h3>
                                 <small>Created At : {post.createdAt}</small>
                                 <br />
                                 <small>Updated At : {post.updatedAt}</small>
