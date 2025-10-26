@@ -200,10 +200,6 @@
     border-radius: 8px;
     padding: 1rem;
     min-height: 250px;
-    transition: all 0.4s ease;
-}
-.post:hover {
-    transform: translateY(-5px);
 }
 
 .post * {
@@ -227,6 +223,11 @@
     margin-top: auto;
 }
 
+.footer-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
 .footer-btns > button {
     border: none;
     border-radius: 8px;
@@ -240,4 +241,56 @@
 
 .footer-btns > button:hover {
     background-color: #2a4fe3;
+}
+
+.edit-btns {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.edit-btns .bx {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+}
+
+.bx-edit {
+    color: #fff;
+    background-color: #0cce6b;
+    transition: all 0.3s ease;
+}
+.bx-edit:hover {
+    background-color: #11c166;
+}
+
+.bx-trash {
+    color: #fff;
+    background-color: #ff4242;
+    transition: all 0.3s ease;
+}
+.bx-trash:hover {
+    background-color: #dc4a4a;
+}
+
+/* Add Button */
+.add-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1000;
+}
+
+.add-btn > button {
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 0.4rem 1.2rem;
+    background-color: #0066ff;
+    color: white;
+    border: #ddd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
 }
