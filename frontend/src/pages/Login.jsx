@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 
 export default function Login() {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -19,8 +21,7 @@ export default function Login() {
             const token = response.data.token;
             const userId = response.data.user.id;
 
-            localStorage.setItem("token", token);
-            localStorage.setItem("userId", userId);
+            login(token, userId);
 
             alert("Login Successful !!");
 
