@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useNotification } from "../../context/NotificationContext";
 import axios from "axios";
 
 export default function Login() {
     const navigate = useNavigate();
+    const { showNotification } = useNotification();
+
     const { login } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -23,11 +26,13 @@ export default function Login() {
 
             login(token, userId);
 
-            alert("Login Successful !!");
-
-            navigate("/");
+            showNotification("Login Successful !!", "success", () =>
+                navigate("/")
+            );
         } catch (err) {
-            alert(err.response.data.error);
+            showNotification(err.response.data.error, "error", () =>
+                navigate("/login")
+            );
         }
     }
 

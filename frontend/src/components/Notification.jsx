@@ -7,8 +7,16 @@ export default function Notification() {
 
     return (
         <div className={`notification ${notification.type}`}>
+            <h2 className="notification-title">
+                {notification.type.charAt(0).toUpperCase() +
+                    notification.type.substring(1)}
+            </h2>
             <span>{notification.message}</span>
-            <button onClick={closeNotification}>×</button>
+            <div className="notification-btn">
+                <button className="close-btn" onClick={closeNotification}>
+                    Ok
+                </button>
+            </div>
         </div>
     );
 }

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useNotification } from "../../context/NotificationContext";
 import axios from "axios";
 
 export default function Register() {
     const navigate = useNavigate();
+    const { showNotification } = useNotification();
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -16,11 +18,14 @@ export default function Register() {
                 `http://localhost:3000/api/auth/register`,
                 { username: username, email: email, password: password }
             );
-            alert("Registration Successfull !!");
 
-            navigate("/login");
+            showNotification("Registration Successful !!", "success", () =>
+                navigate("/login")
+            );
         } catch (err) {
-            alert(err.response.data.error);
+            showNotification(err.response.data.error, "error", () =>
+                navigate("/register")
+            );
         }
     }
 

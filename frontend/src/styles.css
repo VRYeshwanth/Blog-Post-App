@@ -282,6 +282,7 @@
     bottom: 25px;
     right: 25px;
     z-index: 1000;
+    background: none;
 }
 
 .add-btn > button {
@@ -293,4 +294,47 @@
     border: #ddd;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     border-radius: 50%;
+}
+
+/* Notification Component */
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 500px;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1rem;
+}
+.notification * {
+    background-color: #fff;
+}
+
+.notification-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1.5rem;
+}
+.notification-btn > button {
+    font-size: 1.4rem;
+    padding: 0.2rem 0.8rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.notification.success > .notification-btn > button {
+    background-color: #0cce6b;
+}
+.notification.success > .notification-btn > button:hover {
+    background-color: #11c166;
+}
+.notification.error > .notification-btn > button {
+    background-color: #ff4242;
+}
+.notification.error > .notification-btn > button:hover {
+    background-color: #dc4a4a;
 }
