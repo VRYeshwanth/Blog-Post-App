@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
     const [posts, setPosts] = useState([]);
     const { auth } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
@@ -26,7 +28,14 @@ export default function HomePage() {
                         </p>
                         <div className="post-footer">
                             <div className="footer-btns">
-                                <button className="read-more">Read More</button>
+                                <button
+                                    className="read-more"
+                                    onClick={() =>
+                                        navigate(`/posts/${post._id}`)
+                                    }
+                                >
+                                    Read More
+                                </button>
                                 {post.author._id == auth.userId && (
                                     <div className="edit-btns">
                                         <i class="bx bx-edit"></i>
