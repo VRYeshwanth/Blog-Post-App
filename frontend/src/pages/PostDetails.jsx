@@ -16,6 +16,11 @@ export default function PostDetails() {
 
     return (
         <div className="post-page">
+            <div className="back-btn-holder">
+                <button className="back-btn" onClick={() => navigate("/")}>
+                    Go Back
+                </button>
+            </div>
             <div className="post-view">
                 <h2>{post.title}</h2>
                 <p>{post.content}</p>

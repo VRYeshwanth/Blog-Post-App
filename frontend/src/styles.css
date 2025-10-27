@@ -338,3 +338,50 @@
 .notification.error > .notification-btn > button:hover {
     background-color: #dc4a4a;
 }
+
+/* PostDetails Page */
+.post-page {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.post-view {
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
+    padding: 1rem;
+}
+.post-view * {
+    background-color: white;
+}
+
+.post-view > h2 {
+    font-size: 2rem;
+    padding: 1rem 0 0 1rem;
+}
+.post-view > p {
+    white-space: pre-line;
+    font-size: 1.1rem;
+    padding: 1rem;
+}
+.post-view > small {
+    padding: 1rem;
+}
+
+.back-btn-holder {
+    margin-bottom: 1rem;
+}
+
+.back-btn {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    background-color: #0066ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
