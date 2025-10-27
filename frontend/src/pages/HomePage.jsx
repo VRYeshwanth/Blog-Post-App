@@ -38,8 +38,8 @@ export default function HomePage() {
                                 </button>
                                 {post.author._id == auth.userId && (
                                     <div className="edit-btns">
-                                        <i class="bx bx-edit"></i>
-                                        <i class="bx bx-trash"></i>
+                                        <i className="bx bx-edit"></i>
+                                        <i className="bx bx-trash"></i>
                                     </div>
                                 )}
                             </div>

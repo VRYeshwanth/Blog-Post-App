@@ -260,20 +260,20 @@
 
 .bx-edit {
     color: #fff;
-    background-color: #0cce6b;
+    background-color: #0cce6b !important;
     transition: all 0.3s ease;
 }
 .bx-edit:hover {
-    background-color: #11c166;
+    background-color: #11c166 !important;
 }
 
 .bx-trash {
     color: #fff;
-    background-color: #ff4242;
+    background-color: #ff4242 !important;
     transition: all 0.3s ease;
 }
 .bx-trash:hover {
-    background-color: #dc4a4a;
+    background-color: #dc4a4a !important;
 }
 
 /* Add Button */
@@ -343,10 +343,22 @@
 .post-page {
     width: 100%;
     min-height: calc(100vh - 80px);
-    padding: 2rem 1rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left {
+    margin-left: 1rem;
+}
+.right {
+    margin-right: 1rem;
 }
 
 .post-view {
@@ -369,7 +381,7 @@
     padding: 1rem;
 }
 .post-view > small {
-    padding: 1rem;
+    margin-left: 1rem;
 }
 
 .back-btn-holder {

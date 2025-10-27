@@ -1,10 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import axios from "axios";
 
 export default function PostDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { auth } = useAuth();
     const [post, setPost] = useState([]);
 
     useEffect(() => {
@@ -22,10 +24,23 @@ export default function PostDetails() {
                 </button>
             </div>
             <div className="post-view">
-                <h2>{post.title}</h2>
+                <div className="post-header">
+                    <div className="left">
+                        <h2>{post.title}</h2>
+                    </div>
+                    {post?.author?._id == auth.userId && (
+                        <div className="right">
+                            <div className="edit-btns">
+                                <i className="bx bx-edit"></i>
+                                <i className="bx bx-trash"></i>
+                            </div>
+                        </div>
+                    )}
+                </div>
                 <p>{post.content}</p>
-                <small>{post.createdAt}</small>
-                <small>{post.updatedAt}</small>
+                <small>Created At : {post.createdAt}</small>
+                <br />
+                <small>Updated At : {post.updatedAt}</small>
             </div>
         </div>
     );
