@@ -9,6 +9,18 @@ export const getPosts = async (req, res) => {
     }
 };
 
+export const getSinglePost = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const posts = await Post.findById(id)
+            .populate("author", "username")
+            .exec();
+        res.status(200).json(posts);
+    } catch (err) {
+        res.status(500).json({ Error: err.message });
+    }
+};
+
 export const createPost = async (req, res) => {
     try {
         const { title, content } = req.body;
