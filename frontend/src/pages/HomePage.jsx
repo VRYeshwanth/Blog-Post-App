@@ -1,12 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useNotification } from "../../context/NotificationContext";
 
 export default function HomePage() {
     const [posts, setPosts] = useState([]);
     const { auth } = useAuth();
+    const { showNotification } = useNotification();
     const navigate = useNavigate();
+
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://localhost:3000/api/posts/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            });
+            showNotification("Post Deleted Successfully !!", "success");
+            setPosts((prev) => prev.filter((post) => post._id !== id));
+        } catch (err) {
+            showNotification(err?.message, "error", () => navigate("/"));
+        }
+    };
 
     useEffect(() => {
         axios
@@ -39,7 +55,12 @@ export default function HomePage() {
                                 {post.author._id == auth.userId && (
                                     <div className="edit-btns">
                                         <i className="bx bx-edit"></i>
-                                        <i className="bx bx-trash"></i>
+                                        <i
+                                            className="bx bx-trash"
+                                            onClick={() =>
+                                                handleDelete(post._id)
+                                            }
+                                        ></i>
                                     </div>
                                 )}
                             </div>
