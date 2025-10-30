@@ -76,7 +76,7 @@ export default function HomePage() {
             </div>
             {auth.isLoggedIn && (
                 <div className="add-btn">
-                    <button>+</button>
+                    <button onClick={() => navigate("/posts/create")}>+</button>
                 </div>
             )}
         </div>
