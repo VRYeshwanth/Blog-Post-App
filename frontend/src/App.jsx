@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import Notification from "./components/Notification";
 import PostDetails from "./pages/PostDetails";
+import CreatePost from "./pages/CreatePost";
 
 export default function App() {
     return (
@@ -16,6 +17,7 @@ export default function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/posts/:id" element={<PostDetails />} />
+                <Route path="/posts/create" element={<CreatePost />} />
             </Routes>
         </BrowserRouter>
     );
