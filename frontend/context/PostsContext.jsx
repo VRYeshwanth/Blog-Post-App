@@ -9,8 +9,16 @@ export const PostsProvider = ({ children }) => {
         setPosts((prev) => [...prev, newPost]);
     };
 
+    const editPost = (editedPost) => {
+        setPosts((prev) =>
+            prev.map((post) =>
+                post._id === editedPost._id ? editedPost : post
+            )
+        );
+    };
+
     return (
-        <PostsContext.Provider value={{ posts, insertPost }}>
+        <PostsContext.Provider value={{ posts, insertPost, editPost }}>
             {children}
         </PostsContext.Provider>
     );
