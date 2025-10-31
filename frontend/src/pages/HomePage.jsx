@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
+import { usePosts } from "../../context/PostsContext";
 
 export default function HomePage() {
-    const [posts, setPosts] = useState([]);
+    const { posts, setAllPosts, deletePost } = usePosts();
     const { auth } = useAuth();
     const { showNotification } = useNotification();
     const navigate = useNavigate();
@@ -17,8 +18,8 @@ export default function HomePage() {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
+            deletePost(id);
             showNotification("Post Deleted Successfully !!", "success");
-            setPosts((prev) => prev.filter((post) => post._id !== id));
         } catch (err) {
             showNotification(err?.message, "error", () => navigate("/"));
         }
@@ -27,7 +28,7 @@ export default function HomePage() {
     useEffect(() => {
         axios
             .get("http://localhost:3000/api/posts")
-            .then((res) => setPosts(res.data))
+            .then((res) => setAllPosts(res.data))
             .catch((err) => console.log(err));
     }, []);
 

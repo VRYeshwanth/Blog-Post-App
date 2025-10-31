@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
+import { usePosts } from "../../context/PostsContext";
 import axios from "axios";
 
 export default function PostDetails() {
@@ -9,6 +10,7 @@ export default function PostDetails() {
     const navigate = useNavigate();
     const { showNotification } = useNotification();
     const { auth } = useAuth();
+    const { posts, deletePost } = usePosts();
     const [post, setPost] = useState([]);
 
     const handleDelete = async (id) => {
@@ -18,6 +20,7 @@ export default function PostDetails() {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
+            deletePost(id);
             showNotification("Post Deleted Successfully !!", "success", () =>
                 navigate("/")
             );
@@ -27,11 +30,16 @@ export default function PostDetails() {
     };
 
     useEffect(() => {
-        axios
-            .get(`http://localhost:3000/api/posts/${id}`)
-            .then((res) => setPost(res.data))
-            .catch((err) => console.log(err));
-    }, [id]);
+        const foundPost = posts.find((p) => p._id === id);
+        if (foundPost) {
+            setPost(foundPost);
+        } else {
+            axios
+                .get(`http://localhost:3000/api/posts/${id}`)
+                .then((res) => setPost(res.data))
+                .catch((err) => console.log(err));
+        }
+    }, [id, posts]);
 
     return (
         <div className="post-page">
