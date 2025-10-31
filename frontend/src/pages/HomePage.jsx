@@ -54,7 +54,14 @@ export default function HomePage() {
                                 </button>
                                 {post.author._id == auth.userId && (
                                     <div className="edit-btns">
-                                        <i className="bx bx-edit"></i>
+                                        <i
+                                            className="bx bx-edit"
+                                            onClick={() =>
+                                                navigate(
+                                                    `/posts/edit/${post._id}`
+                                                )
+                                            }
+                                        ></i>
                                         <i
                                             className="bx bx-trash"
                                             onClick={() =>

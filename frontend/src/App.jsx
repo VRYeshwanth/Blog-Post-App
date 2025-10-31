@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Notification from "./components/Notification";
 import PostDetails from "./pages/PostDetails";
 import CreatePost from "./pages/CreatePost";
+import EditPost from "./pages/EditPost";
 
 export default function App() {
     return (
@@ -18,6 +19,7 @@ export default function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/posts/:id" element={<PostDetails />} />
                 <Route path="/posts/create" element={<CreatePost />} />
+                <Route path="/posts/edit/:id" element={<EditPost />} />
             </Routes>
         </BrowserRouter>
     );
