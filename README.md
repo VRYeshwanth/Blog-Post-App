@@ -23,8 +23,8 @@ A full-stack blogging application built using the MERN stack (MongoDB, Express, 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/mern-blog-app.git
-cd mern-blog-app
+git clone https://github.com/VRYeshwanth/Blog-Post-App.git
+cd Blog-Post-App
 ```
 
 ### 2. Install Dependencies
@@ -85,3 +85,42 @@ The app will run on :
 | POST   | /api/posts         | Create new post     | ✅ Yes        |
 | PATCH  | /api/posts/:id     | Edit a post         | ✅ Yes        |
 | DELETE | /api/posts/:id     | Delete a post       | ✅ Yes        |
+
+## 📸 App Preview
+
+Here are some screenshots of the MERN Blog App in action:
+
+### Home Page
+
+**Before Login:**
+![Home Page](./frontend/screenshots/HomePage.png)
+
+### Register Page
+
+![Register Page](./frontend//screenshots/RegisterPage.png)
+
+### Login Page
+
+![Login Page](./frontend/screenshots/LoginPage.png)
+
+### Home Page
+
+**After Login:**
+![HomePage - Logged In](./frontend/screenshots/HomePage_Login.png)
+
+### Post Details
+
+![Post Details](./frontend//screenshots/PostDetails.png)
+
+### Add Post Page
+
+![Add Post Page](./frontend/screenshots/AddPostPage.png)
+
+### Edit Post Page
+
+![Edit Post Page](./frontend/screenshots/EditPostPage.png)
+
+## 🤝 Contributing
+
+Contributions are welcome!  
+If you'd like to improve this project:
