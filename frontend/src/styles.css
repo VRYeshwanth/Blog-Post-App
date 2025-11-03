@@ -414,7 +414,15 @@
 }
 
 .create-view {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
     width: 100%;
+}
+
+.create-form > *,
+.create-view > * {
+    background-color: #fff;
 }
 
 .create-form-heading {
@@ -469,7 +477,15 @@
 }
 
 .edit-view {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
     width: 100%;
+}
+
+.edit-view > *,
+.edit-form > * {
+    background-color: #fff;
 }
 
 .edit-form-heading {
