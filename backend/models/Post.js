@@ -5,19 +5,25 @@ const postSchema = new mongoose.Schema({
     content: String,
     author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     },
-    updatedAt: Date
-})
+    likes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        },
+    ],
+    updatedAt: Date,
+});
 
-postSchema.pre("save", function(next) {
+postSchema.pre("save", function (next) {
     this.updatedAt = new Date();
     next();
-})
+});
 
 const Post = mongoose.model("Post", postSchema);
 

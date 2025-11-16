@@ -76,3 +76,26 @@ export const deletePost = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+export const handleLikes = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.userId;
+
+        const existingPost = await Post.findOne({ _id: id });
+
+        if (existingPost.likes.includes(userId)) {
+            existingPost.likes = existingPost.likes.filter(
+                (id) => id.toString() !== userId
+            );
+        } else {
+            existingPost.likes.push(userId);
+        }
+
+        await existingPost.save();
+
+        res.status(200).json(existingPost);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
