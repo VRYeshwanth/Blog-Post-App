@@ -88,6 +88,10 @@
     transition: all 0.3s ease;
 }
 
+.nav-btns button > i {
+    background: none;
+}
+
 .nav-btns button:hover {
     background-color: var(--read-more-hover);
 }
@@ -134,7 +138,7 @@
 .register-form > button {
     border: none;
     background-color: var(--read-more);
-    color: var(--color);
+    color: #fff;
     border-radius: 10px;
     cursor: pointer;
     font-size: 1.2rem;
@@ -188,7 +192,7 @@
 .login-form > button {
     border: none;
     background-color: var(--read-more);
-    color: var(--color);
+    color: #fff;
     border-radius: 10px;
     cursor: pointer;
     font-size: 1.2rem;
