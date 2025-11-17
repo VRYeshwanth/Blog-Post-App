@@ -92,6 +92,8 @@ export const handleLikes = async (req, res) => {
             existingPost.likes.push(userId);
         }
 
+        await existingPost.populate("author");
+
         await existingPost.save();
 
         res.status(200).json(existingPost);

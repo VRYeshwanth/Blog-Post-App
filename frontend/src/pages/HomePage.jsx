@@ -1,15 +1,35 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
 import { usePosts } from "../../context/PostsContext";
 
 export default function HomePage() {
-    const { posts, setAllPosts, deletePost } = usePosts();
+    const { posts, setAllPosts, deletePost, editPost } = usePosts();
     const { auth } = useAuth();
     const { showNotification } = useNotification();
     const navigate = useNavigate();
+
+    const toggleLikes = async (id) => {
+        try {
+            const response = await axios.put(
+                `http://localhost:3000/api/posts/${id}/like`,
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "token"
+                        )}`,
+                    },
+                }
+            );
+
+            editPost(response.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     const handleDelete = async (id) => {
         try {
@@ -73,7 +93,30 @@ export default function HomePage() {
                                 )}
                             </div>
                             <div className="footer-metadata">
-                                <h3>Author : {post.author.username}</h3>
+                                <div className="group">
+                                    <h3>Author : {post.author.username}</h3>
+                                    <div className="likes">
+                                        <button
+                                            className="like-button"
+                                            onClick={() =>
+                                                toggleLikes(post._id)
+                                            }
+                                        >
+                                            <i
+                                                class={
+                                                    post.likes.some(
+                                                        (id) =>
+                                                            id.toString() ===
+                                                            auth.userId
+                                                    )
+                                                        ? "bx bxs-heart"
+                                                        : "bx bx-heart"
+                                                }
+                                            ></i>
+                                        </button>
+                                        <span>{post.likes.length}</span>
+                                    </div>
+                                </div>
                                 <small>Created At : {post.createdAt}</small>
                                 <br />
                                 <small>Updated At : {post.updatedAt}</small>

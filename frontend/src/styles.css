@@ -528,3 +528,31 @@
 .edit-form > button:hover {
     background-color: #2a4fe3;
 }
+
+.group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.likes {
+    display: flex;
+    align-items: center;
+}
+
+.likes > span {
+    padding: 0.5rem;
+}
+
+.like-button {
+    font-size: 1.4rem;
+    display: block;
+    padding: 0.5rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.like-button > i {
+    color: red;
+}
