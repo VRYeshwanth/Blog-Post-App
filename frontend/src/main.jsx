@@ -4,13 +4,16 @@ import App from "./App.jsx";
 import { AuthProvider } from "../context/AuthContext.jsx";
 import { NotificationProvider } from "../context/NotificationContext.jsx";
 import { PostsProvider } from "../context/PostsContext.jsx";
+import { ThemeProvider } from "../context/ThemeContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <AuthProvider>
             <NotificationProvider>
                 <PostsProvider>
-                    <App />
+                    <ThemeProvider>
+                        <App />
+                    </ThemeProvider>
                 </PostsProvider>
             </NotificationProvider>
         </AuthProvider>
