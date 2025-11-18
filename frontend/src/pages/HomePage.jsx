@@ -13,7 +13,7 @@ export default function HomePage() {
 
     const toggleLikes = async (id) => {
         try {
-            const response = await axios.put(
+            const response = await axios.patch(
                 `http://localhost:3000/api/posts/${id}/like`,
                 {},
                 {
@@ -109,8 +109,8 @@ export default function HomePage() {
                                                             id.toString() ===
                                                             auth.userId
                                                     )
-                                                        ? "bx bxs-heart"
-                                                        : "bx bx-heart"
+                                                        ? "bx bxs-like"
+                                                        : "bx bx-like"
                                                 }
                                             ></i>
                                         </button>
