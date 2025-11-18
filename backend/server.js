@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
 
 const app = express();
 dotenv.config();
@@ -19,6 +20,7 @@ mongoose
 
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`✅ Server running on PORT ${process.env.PORT}`);
