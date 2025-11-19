@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
 import { usePosts } from "../../context/PostsContext";
+import CommentList from "../components/CommentList";
 import axios from "axios";
 
 export default function PostDetails() {
@@ -74,6 +75,10 @@ export default function PostDetails() {
                 <small>Created At : {post.createdAt}</small>
                 <br />
                 <small>Updated At : {post.updatedAt}</small>
+            </div>
+            <div className="comment-view">
+                <h1 className="comment-heading">Comments</h1>
+                <CommentList postId={post._id} />
             </div>
         </div>
     );
