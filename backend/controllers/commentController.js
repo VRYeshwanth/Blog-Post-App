@@ -33,3 +33,45 @@ export const createComment = async (req, res) => {
         return res.status(500).json({ error: err.message });
     }
 };
+
+export const editComment = async (req, res) => {
+    try {
+        const { text } = req.body;
+        const { id } = req.params;
+
+        const existingComment = await Comment.findOne({ _id: id });
+
+        if (!existingComment)
+            return res.status(400).json({ error: "No Comment found !!" });
+
+        if (existingComment.userId.toString() !== req.userId)
+            return res.status(400).json({ error: "Access Denied !!" });
+
+        existingComment.text = text;
+
+        await existingComment.save();
+
+        return res.status(201).json(existingComment);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+};
+
+export const deleteComment = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const existingComment = await Comment.findOne({ _id: id });
+
+        if (existingComment.userId.toString() !== req.userId)
+            return res.status(400).json({ error: "Access Denied !!" });
+
+        await Comment.deleteOne({ _id: id });
+
+        return res
+            .status(200)
+            .json({ success: "Comment successfully deleted !!" });
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+};
