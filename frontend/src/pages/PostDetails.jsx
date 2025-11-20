@@ -13,6 +13,9 @@ export default function PostDetails() {
     const { auth } = useAuth();
     const { posts, deletePost } = usePosts();
     const [post, setPost] = useState([]);
+    const [showForm, setShowForm] = useState(false);
+    const [text, setText] = useState("");
+    const [comments, setComments] = useState([]);
 
     const handleDelete = async (id) => {
         try {
@@ -30,6 +33,36 @@ export default function PostDetails() {
         }
     };
 
+    const handleAddComment = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post(
+                `http://localhost:3000/api/comments/`,
+                {
+                    text: text,
+                    userId: auth.userId,
+                    postId: post._id,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "token"
+                        )}`,
+                    },
+                }
+            );
+
+            const updated = await axios.get(
+                `http://localhost:3000/api/comments/${post._id}`
+            );
+            setComments(updated.data);
+            setText("");
+            setShowForm(false);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
         const foundPost = posts.find((p) => p._id === id);
         if (foundPost) {
@@ -41,6 +74,15 @@ export default function PostDetails() {
                 .catch((err) => console.log(err));
         }
     }, [id, posts]);
+
+    useEffect(() => {
+        if (!post._id) return;
+
+        axios
+            .get(`http://localhost:3000/api/comments/${post._id}`)
+            .then((res) => setComments(res.data))
+            .catch((err) => console.log(err));
+    }, [post._id]);
 
     return (
         <div className="post-page">
@@ -77,8 +119,26 @@ export default function PostDetails() {
                 <small>Updated At : {post.updatedAt}</small>
             </div>
             <div className="comment-view">
-                <h1 className="comment-heading">Comments</h1>
-                <CommentList postId={post._id} />
+                <div className="comment-view-heading">
+                    <h1 className="comment-heading">Comments</h1>
+                    {auth.userId && (
+                        <button onClick={() => setShowForm(!showForm)}>
+                            +
+                        </button>
+                    )}
+                </div>
+                {showForm && (
+                    <form onSubmit={handleAddComment}>
+                        <textarea
+                            placeholder="Enter your comment : "
+                            required
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                        ></textarea>
+                        <button type="submit">Post</button>
+                    </form>
+                )}
+                <CommentList comments={comments} showForm={showForm} />
             </div>
         </div>
     );
