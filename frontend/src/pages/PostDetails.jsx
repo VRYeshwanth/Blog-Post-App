@@ -40,7 +40,6 @@ export default function PostDetails() {
                 `http://localhost:3000/api/comments/`,
                 {
                     text: text,
-                    userId: auth.userId,
                     postId: post._id,
                 },
                 {

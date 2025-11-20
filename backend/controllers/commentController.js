@@ -15,16 +15,16 @@ export const getComments = async (req, res) => {
 
 export const createComment = async (req, res) => {
     try {
-        const { text, userId, postId } = req.body;
+        const { text, postId } = req.body;
 
-        if (!text || !userId || !postId)
+        if (!text || !postId)
             return res
                 .status(400)
                 .json({ error: "All fields must be present !!" });
 
         const newComment = await Comment.create({
             text: text,
-            userId: userId,
+            userId: req.userId,
             postId: postId,
         });
 

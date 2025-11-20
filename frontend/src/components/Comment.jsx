@@ -1,3 +1,4 @@
+import { formatTime } from "../../utils/FormatTime";
 export default function Comment({ comment }) {
     return (
         <div className="comment">
@@ -10,8 +11,7 @@ export default function Comment({ comment }) {
                 <p>{comment.text}</p>
             </div>
             <div className="footer">
-                <small>Created At: {comment.createdAt}</small>
-                <small>Updated At: {comment.updatedAt}</small>
+                <small>{formatTime(comment.createdAt)}</small>
             </div>
         </div>
     );
