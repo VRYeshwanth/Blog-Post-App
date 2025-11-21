@@ -76,6 +76,32 @@ export default function PostDetails() {
         }
     };
 
+    const handleEditComment = async (newText, id, e) => {
+        try {
+            const response = await axios.patch(
+                `http://localhost:3000/api/comments/${id}`,
+                {
+                    text: newText,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "token"
+                        )}`,
+                    },
+                }
+            );
+
+            setComments((prev) =>
+                prev.map((comment) =>
+                    comment._id === response.data._id ? response.data : comment
+                )
+            );
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
         const foundPost = posts.find((p) => p._id === id);
         if (foundPost) {
@@ -155,6 +181,7 @@ export default function PostDetails() {
                     comments={comments}
                     showForm={showForm}
                     onDelete={handleDeleteComment}
+                    onEdit={handleEditComment}
                 />
             </div>
         </div>

@@ -51,7 +51,8 @@ export const editComment = async (req, res) => {
 
         await existingComment.save();
 
-        return res.status(201).json(existingComment);
+        const populatedComment = await existingComment.populate("userId");
+        return res.status(201).json(populatedComment);
     } catch (err) {
         return res.status(500).json({ error: err.message });
     }
