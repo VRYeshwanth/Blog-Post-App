@@ -1,6 +1,6 @@
 import Comment from "./Comment";
 
-export default function CommentList({ comments, showForm }) {
+export default function CommentList({ comments, showForm, onDelete }) {
     return (
         <div className="comment-list">
             {comments.length === 0 && !showForm ? (
@@ -10,7 +10,11 @@ export default function CommentList({ comments, showForm }) {
                 </div>
             ) : (
                 comments.map((comment) => (
-                    <Comment key={comment._id} comment={comment} />
+                    <Comment
+                        key={comment._id}
+                        comment={comment}
+                        onDelete={onDelete}
+                    />
                 ))
             )}
         </div>

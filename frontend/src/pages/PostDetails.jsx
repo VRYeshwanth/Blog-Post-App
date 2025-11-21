@@ -62,6 +62,20 @@ export default function PostDetails() {
         }
     };
 
+    const handleDeleteComment = async (id) => {
+        try {
+            await axios.delete(`http://localhost:3000/api/comments/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            });
+
+            setComments((prev) => prev.filter((c) => c._id !== id));
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
         const foundPost = posts.find((p) => p._id === id);
         if (foundPost) {
@@ -137,7 +151,11 @@ export default function PostDetails() {
                         <button type="submit">Post</button>
                     </form>
                 )}
-                <CommentList comments={comments} showForm={showForm} />
+                <CommentList
+                    comments={comments}
+                    showForm={showForm}
+                    onDelete={handleDeleteComment}
+                />
             </div>
         </div>
     );

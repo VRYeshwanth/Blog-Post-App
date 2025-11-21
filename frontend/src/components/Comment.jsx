@@ -1,6 +1,6 @@
 import { useAuth } from "../../context/AuthContext";
 import { formatTime } from "../../utils/FormatTime";
-export default function Comment({ comment }) {
+export default function Comment({ comment, onDelete }) {
     const { auth } = useAuth();
 
     return (
@@ -12,7 +12,10 @@ export default function Comment({ comment }) {
                 {auth.userId === comment.userId._id && (
                     <div className="header-btns">
                         <i className="bx bx-edit"></i>
-                        <i className="bx bx-trash"></i>
+                        <i
+                            className="bx bx-trash"
+                            onClick={() => onDelete(comment._id)}
+                        ></i>
                     </div>
                 )}
             </div>
