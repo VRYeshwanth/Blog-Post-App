@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import Register from "./pages/Register";
@@ -23,15 +23,15 @@ export default function App() {
             if (isExpired) {
                 localStorage.clear();
                 alert("Session expired. Please log in again.");
-                window.location.href = "/login";
+                window.location.href = "#/login";
             }
         } catch (err) {
             localStorage.clear();
-            window.location.href = "/login";
+            window.location.href = "#/login";
         }
     }, []);
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Navbar />
             <Notification />
             <Routes>
@@ -42,6 +42,6 @@ export default function App() {
                 <Route path="/posts/create" element={<CreatePost />} />
                 <Route path="/posts/edit/:id" element={<EditPost />} />
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
