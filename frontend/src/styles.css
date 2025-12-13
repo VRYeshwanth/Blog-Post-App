@@ -687,7 +687,7 @@
 }
 
 .comment-view > form button {
-    color: var(--color);
+    color: #fff;
     padding: 1rem;
     font-size: 1.2rem;
     border: none;
