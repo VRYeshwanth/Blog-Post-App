@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -13,17 +13,7 @@ export default function HomePage() {
 
     const toggleLikes = async (id) => {
         try {
-            const response = await axios.patch(
-                `http://localhost:3000/api/posts/${id}/like`,
-                {},
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            "token"
-                        )}`,
-                    },
-                }
-            );
+            const response = await axios.patch(`/api/posts/${id}/like`);
 
             editPost(response.data);
         } catch (err) {
@@ -33,11 +23,7 @@ export default function HomePage() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:3000/api/posts/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            });
+            await axios.delete(`/api/posts/${id}`);
             deletePost(id);
             showNotification("Post Deleted Successfully !!", "success");
         } catch (err) {
@@ -47,7 +33,7 @@ export default function HomePage() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:3000/api/posts")
+            .get("/api/posts")
             .then((res) => setAllPosts(res.data))
             .catch((err) => console.log(err));
     }, []);

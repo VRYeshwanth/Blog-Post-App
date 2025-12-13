@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { usePosts } from "../../context/PostsContext";
 import { useParams } from "react-router-dom";
 import { useNotification } from "../../context/NotificationContext";
-import axios from "axios";
+import axios from "../utils/axios.js";
 
 export default function EditPost() {
     const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function EditPost() {
             setPost(foundPost);
         } else {
             axios
-                .get(`http://localhost:3000/api/posts/${id}`)
+                .get(`/api/posts/${id}`)
                 .then((res) => setPost(res.data))
                 .catch((err) => console.log(err));
         }
@@ -27,17 +27,8 @@ export default function EditPost() {
     const handleEdit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.patch(
-                `http://localhost:3000/api/posts/${id}`,
-                post,
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            "token"
-                        )}`,
-                    },
-                }
-            );
+            const res = await axios.patch(`/api/posts/${id}`, post);
+
             editPost(res.data);
             showNotification("Post edited successfully !!", "success", () =>
                 navigate("/")

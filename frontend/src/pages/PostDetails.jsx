@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
 import { usePosts } from "../../context/PostsContext";
 import CommentList from "../components/CommentList";
-import axios from "axios";
+import axios from "../utils/axios.js";
 
 export default function PostDetails() {
     const { id } = useParams();
@@ -19,11 +19,7 @@ export default function PostDetails() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:3000/api/posts/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            });
+            await axios.delete(`/api/posts/${id}`);
             deletePost(id);
             showNotification("Post Deleted Successfully !!", "success", () =>
                 navigate("/")
@@ -36,24 +32,12 @@ export default function PostDetails() {
     const handleAddComment = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(
-                `http://localhost:3000/api/comments/`,
-                {
-                    text: text,
-                    postId: post._id,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            "token"
-                        )}`,
-                    },
-                }
-            );
+            await axios.post("/api/comments", {
+                text,
+                postId: post._id,
+            });
 
-            const updated = await axios.get(
-                `http://localhost:3000/api/comments/${post._id}`
-            );
+            const updated = await axios.get(`/api/comments/${post._id}`);
             setComments(updated.data);
             setText("");
             setShowForm(false);
@@ -64,11 +48,7 @@ export default function PostDetails() {
 
     const handleDeleteComment = async (id) => {
         try {
-            await axios.delete(`http://localhost:3000/api/comments/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-            });
+            await axios.delete(`/api/comments/${id}`);
 
             setComments((prev) => prev.filter((c) => c._id !== id));
         } catch (err) {
@@ -78,19 +58,9 @@ export default function PostDetails() {
 
     const handleEditComment = async (newText, id, e) => {
         try {
-            const response = await axios.patch(
-                `http://localhost:3000/api/comments/${id}`,
-                {
-                    text: newText,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            "token"
-                        )}`,
-                    },
-                }
-            );
+            const response = await axios.patch(`/api/comments/${id}`, {
+                text: newText,
+            });
 
             setComments((prev) =>
                 prev.map((comment) =>
@@ -108,7 +78,7 @@ export default function PostDetails() {
             setPost(foundPost);
         } else {
             axios
-                .get(`http://localhost:3000/api/posts/${id}`)
+                .get(`/api/posts/${id}`)
                 .then((res) => setPost(res.data))
                 .catch((err) => console.log(err));
         }
@@ -118,7 +88,7 @@ export default function PostDetails() {
         if (!post._id) return;
 
         axios
-            .get(`http://localhost:3000/api/comments/${post._id}`)
+            .get(`/api/comments/${post._id}`)
             .then((res) => setComments(res.data))
             .catch((err) => console.log(err));
     }, [post._id]);

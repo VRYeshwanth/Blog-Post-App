@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
-import axios from "axios";
+import axios from "../utils/axios.js";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -16,10 +16,10 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post(
-                `http://localhost:3000/api/auth/login`,
-                { email: email, password: password }
-            );
+            const response = await axios.post("/api/auth/login", {
+                email,
+                password,
+            });
 
             const token = response.data.token;
             const userId = response.data.user.id;

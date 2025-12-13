@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNotification } from "../../context/NotificationContext";
 import { usePosts } from "../../context/PostsContext";
-import axios from "axios";
+import axios from "../utils/axios.js";
 
 export default function CreatePost() {
     const navigate = useNavigate();
@@ -14,20 +14,10 @@ export default function CreatePost() {
 
     const handlePostCreation = async (postTitle, postContent) => {
         try {
-            const response = await axios.post(
-                `http://localhost:3000/api/posts`,
-                {
-                    title: postTitle,
-                    content: postContent,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            "token"
-                        )}`,
-                    },
-                }
-            );
+            const response = await axios.post("/api/posts", {
+                title: postTitle,
+                content: postContent,
+            });
 
             insertPost(response.data);
 

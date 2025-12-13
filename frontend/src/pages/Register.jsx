@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNotification } from "../../context/NotificationContext";
-import axios from "axios";
+import axios from "../utils/axios.js";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -14,10 +14,11 @@ export default function Register() {
     async function registerUser(e) {
         e.preventDefault();
         try {
-            const response = await axios.post(
-                `http://localhost:3000/api/auth/register`,
-                { username: username, email: email, password: password }
-            );
+            const response = await axios.post("/api/auth/register", {
+                username,
+                email,
+                password,
+            });
 
             showNotification("Registration Successful !!", "success", () =>
                 navigate("/login")
