@@ -2,6 +2,14 @@
 
 A full-stack blogging application built using the MERN stack (MongoDB, Express, React, and Node.js). Users can register, log in, create posts, edit them, and delete them. The app also supports JWT-based authentication and dynamic routing.
 
+## 🔗 Live Site URL : [Click Here](https://vryeshwanth.github.io/Blog-Post-App/)
+
+## 🚀 Deployment
+
+-   **Frontend:** GitHub Pages
+-   **Backend:** Render
+-   **Database:** MongoDB Atlas
+
 ## 🧠 Tech Stack
 
 -   **Frontend:** React, React Router, Context API, Axios
@@ -50,7 +58,7 @@ npm install
 ```bash
 PORT=3000
 MONGO_URI=your_mongodb_connection_string
-JWT_SECRET_KEY=your_secret_key
+JWT_SECRET=your_secret_key
 ```
 
 ### 4. Run the Application
@@ -122,5 +130,11 @@ Here are some screenshots of the MERN Blog App in action:
 
 ## 🤝 Contributing
 
-Contributions are welcome!  
+Contributions are welcome!
+
 If you'd like to improve this project:
+
+1. Fork the repository
+2. Create a new branch
+3. Make your changes
+4. Submit a pull request
