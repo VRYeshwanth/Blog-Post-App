@@ -63,11 +63,15 @@
 
 .logo {
     cursor: pointer;
-    display: contents;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-secondary);
 }
 
 .logo > h1 {
     font-size: 2rem;
+    text-align: center;
     background-color: var(--bg-secondary);
 }
 
@@ -96,6 +100,13 @@
     background-color: var(--read-more-hover);
 }
 
+@media (max-width: 425px) {
+    .logo > h1 {
+        font-size: 1.4rem;
+        margin-right: 0.5rem;
+    }
+}
+
 /* Register Page */
 
 .register-box {
@@ -106,8 +117,6 @@
     border: 1px solid var(--border);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    width: 35%;
-    margin: 0 auto;
     padding: 1rem;
     background-color: var(--bg-secondary);
 }
@@ -123,6 +132,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+    align-items: center;
 }
 
 .register-form input {
@@ -133,6 +143,7 @@
     margin: 0.5rem;
     font-size: 1.2rem;
     background-color: var(--bg-secondary);
+    width: 100%;
 }
 
 .register-form > button {
@@ -161,8 +172,6 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     background-color: var(--bg-secondary);
     border-radius: 10px;
-    width: 35%;
-    margin: 0 auto;
     padding: 1rem;
 }
 
@@ -177,6 +186,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+    align-items: center;
 }
 
 .login-form input {
@@ -205,6 +215,13 @@
     background-color: var(--read-more-hover);
 }
 
+@media (max-width: 425px) {
+    .login-box,
+    .register-box {
+        padding: 1rem 0;
+    }
+}
+
 /* Home Page */
 .home-page {
     width: 100%;
@@ -217,11 +234,10 @@
 
 .posts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1rem;
     padding: 1rem;
-    width: 95%;
-    max-width: 1200px;
+    width: 100%;
 }
 
 .post {
@@ -335,7 +351,7 @@
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    min-width: 500px;
+    width: min(90vw, 500px);
     background-color: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -385,13 +401,13 @@
 .post-header {
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
 }
 
-.left {
-    margin-left: 1rem;
-}
 .right {
-    margin-right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .post-view {
@@ -411,10 +427,7 @@
 .post-view > p {
     white-space: pre-line;
     font-size: 1.1rem;
-    padding: 1rem;
-}
-.post-view > small {
-    margin-left: 1rem;
+    padding: 1rem 0;
 }
 
 .back-btn-holder {
@@ -423,13 +436,20 @@
 
 .back-btn {
     font-size: 1.2rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     background-color: var(--read-more);
     color: #fff;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.back-btn > svg {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    background-color: var(--read-more);
 }
 
 .back-btn:hover {
@@ -742,4 +762,10 @@
 .form-btns button:nth-child(2),
 .form-btns > button:nth-child(2) > i {
     background-color: var(--delete);
+}
+
+@media (max-width: 425px) {
+    .form-box > form {
+        flex-direction: column;
+    }
 }
