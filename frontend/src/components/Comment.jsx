@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { formatTime } from "../../utils/FormatTime";
+import { formatTime } from "../utils/formatTime";
 export default function Comment({ comment, onDelete, onEdit }) {
     const { auth } = useAuth();
     const [editMode, setEditMode] = useState(false);
