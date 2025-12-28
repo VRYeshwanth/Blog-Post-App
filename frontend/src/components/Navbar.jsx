@@ -13,7 +13,7 @@ export default function Navbar() {
     }
 
     return (
-        <div className="navbar">
+        <div className="navbar glass-nav">
             <div className="logo" onClick={() => navigate("/")}>
                 <h1>Blog App</h1>
             </div>

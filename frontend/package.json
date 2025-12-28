@@ -1,7 +1,7 @@
 {
     "name": "frontend",
     "private": true,
-    "version": "0.0.0",
+    "version": "1.2.0",
     "type": "module",
     "homepage": "https://VRYeshwanth.github.io/Blog-Post-App",
     "scripts": {

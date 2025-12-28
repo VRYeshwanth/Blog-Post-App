@@ -33,15 +33,7 @@ export default function CreatePost() {
         <div className="create-post-page">
             <div className="back-btn-holder">
                 <button className="back-btn" onClick={() => navigate("/")}>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#e3e3e3"
-                    >
-                        <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
-                    </svg>
+                    <i class="bx bx-arrow-back"></i>
                 </button>
             </div>
             <div className="create-view">
@@ -59,11 +51,13 @@ export default function CreatePost() {
                         value={title}
                         placeholder="Enter the title of the post :"
                         onChange={(e) => setTitle(e.target.value)}
+                        required
                     />
                     <textarea
                         value={content}
                         placeholder="Enter the content of your post :"
                         onChange={(e) => setContent(e.target.value)}
+                        required
                     ></textarea>
                     <button type="submit">Create</button>
                 </form>

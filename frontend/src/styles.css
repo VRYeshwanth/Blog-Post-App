@@ -1,21 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 
 :root {
-    --bg-primary: #ededed;
+    --bg-primary: #f8fafc;
     --bg-secondary: #fff;
-    --read-more: #0066ff;
-    --read-more-hover: #2a4fe3;
+    --read-more: #3b82f6;
+    --read-more-hover: #2563eb;
     --edit: #0cce6b;
     --edit-hover: #11c166;
     --delete: #ff4242;
     --delete-hover: #dc4a4a;
     --border: #000;
-    --color: #000;
+    --color: #334155;
 }
 
 .dark {
-    --bg-primary: #161b22;
-    --bg-secondary: #0d1117;
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
     --read-more: #0066ff;
     --read-more-hover: #2a4fe3;
     --edit: #0cce6b;
@@ -30,7 +30,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Open Sans", "sans-serif";
+    font-family: "Outfit", "sans-serif";
+    letter-spacing: 0.5px;
     background-color: var(--bg-primary);
 }
 
@@ -58,7 +59,18 @@
     position: sticky;
     top: 0;
     height: 80px;
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-primary);
+}
+
+.glass-nav {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.dark .glass-nav {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .logo {
@@ -66,17 +78,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--bg-secondary);
+    background: none;
 }
 
 .logo > h1 {
     font-size: 2rem;
     text-align: center;
-    background-color: var(--bg-secondary);
+    background: none;
 }
 
 .nav-btns {
-    background-color: var(--bg-secondary);
+    background: none;
     display: flex;
     gap: 1rem;
 }
@@ -114,11 +126,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    background-color: var(--bg-secondary);
     border-radius: 10px;
     padding: 1rem;
-    background-color: var(--bg-secondary);
 }
 
 .register-box > h1 {
@@ -168,8 +179,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     background-color: var(--bg-secondary);
     border-radius: 10px;
     padding: 1rem;
@@ -197,6 +207,7 @@
     padding: 0.5rem;
     margin: 0.5rem;
     font-size: 1.2rem;
+    width: 100%;
 }
 
 .login-form > button {
@@ -234,17 +245,31 @@
 
 .posts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 1rem;
     padding: 1rem;
     width: 100%;
+}
+
+@media (max-width: 640px) {
+    .posts {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .nav-btns {
+        gap: 0.6rem;
+    }
+    .nav-btns button {
+        font-size: 1rem;
+        padding: 0.3rem 0.8rem;
+    }
 }
 
 .post {
     display: flex;
     flex-direction: column;
     background-color: var(--bg-secondary);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 1rem;
     min-height: 250px;
@@ -337,7 +362,7 @@
 .add-btn > button {
     cursor: pointer;
     font-size: 2rem;
-    padding: 0.4rem 1.2rem;
+    padding: 0.3rem 1rem;
     background-color: var(--read-more);
     color: #fff;
     border: var(--border);
@@ -412,6 +437,7 @@
 
 .post-view {
     background-color: var(--bg-secondary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     width: 100%;
     border-radius: 10px;
     padding: 1rem;
@@ -435,8 +461,7 @@
 }
 
 .back-btn {
-    font-size: 1.2rem;
-    padding: 0.5rem;
+    font-size: 1.5rem;
     background-color: var(--read-more);
     color: #fff;
     border: none;
@@ -445,14 +470,15 @@
     transition: all 0.3s ease;
 }
 
-.back-btn > svg {
-    width: 30px;
-    height: 30px;
-    display: flex;
+.back-btn > i {
+    padding: 0.5rem;
+    border-radius: 10px;
     background-color: var(--read-more);
+    transition: all 0.3s ease;
 }
 
-.back-btn:hover {
+.back-btn:hover,
+.back-btn > i:hover {
     background-color: var(--read-more-hover);
 }
 
@@ -468,6 +494,7 @@
 
 .create-view {
     background-color: var(--bg-secondary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     padding: 1rem;
     border-radius: 10px;
     width: 100%;
@@ -483,7 +510,7 @@
 }
 
 .create-form {
-    padding: 1rem 1rem 0;
+    padding: 1rem 0;
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -532,6 +559,7 @@
 
 .edit-view {
     background-color: var(--bg-secondary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     padding: 1rem;
     border-radius: 10px;
     width: 100%;
@@ -547,7 +575,7 @@
 }
 
 .edit-form {
-    padding: 1rem 1rem 0;
+    padding: 1rem 0;
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -617,12 +645,13 @@
     background-color: var(--bg-primary);
     width: 100%;
     border-radius: 10px;
-    padding: 1rem;
+    padding: 0.5rem;
     margin-top: 1rem;
 }
 
 .comment {
     background-color: var(--bg-secondary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     width: 100%;
     border-radius: 10px;
     padding: 1rem;
@@ -645,7 +674,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
 }
 
 .header-btns {
@@ -693,7 +721,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 .comment-view > form textarea {
