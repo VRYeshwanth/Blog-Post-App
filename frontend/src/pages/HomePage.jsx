@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
 import { usePosts } from "../../context/PostsContext";
+import { useLoader } from "../../context/LoaderContext.jsx";
 
 export default function HomePage() {
     const { posts, setAllPosts, deletePost, editPost } = usePosts();
     const { auth } = useAuth();
     const { showNotification } = useNotification();
+    const { isLoading, showLoader, hideLoader } = useLoader();
     const navigate = useNavigate();
 
     const toggleLikes = async (id) => {
@@ -22,20 +24,32 @@ export default function HomePage() {
     };
 
     const handleDelete = async (id) => {
+        showLoader();
         try {
             await axios.delete(`/api/posts/${id}`);
             deletePost(id);
             showNotification("Post Deleted Successfully !!", "success");
         } catch (err) {
             showNotification(err?.message, "error", () => navigate("/"));
+        } finally {
+            hideLoader();
         }
     };
 
     useEffect(() => {
-        axios
-            .get("/api/posts")
-            .then((res) => setAllPosts(res.data))
-            .catch((err) => console.log(err));
+        const fetchPosts = async () => {
+            showLoader();
+            try {
+                const res = await axios.get("/api/posts");
+                setAllPosts(res.data);
+            } catch (err) {
+                console.log(err);
+            } finally {
+                hideLoader();
+            }
+        };
+
+        fetchPosts();
     }, []);
 
     return (
@@ -53,28 +67,35 @@ export default function HomePage() {
                             <div className="footer-btns">
                                 <button
                                     className="read-more"
+                                    disabled={isLoading}
                                     onClick={() =>
                                         navigate(`/posts/${post._id}`)
                                     }
                                 >
                                     Read More
                                 </button>
-                                {post.author._id == auth.userId && (
+                                {post.author._id === auth.userId && (
                                     <div className="edit-btns">
-                                        <i
-                                            className="bx bx-edit"
+                                        <button
+                                            className="icon-btn"
+                                            disabled={isLoading}
                                             onClick={() =>
                                                 navigate(
                                                     `/posts/edit/${post._id}`
                                                 )
                                             }
-                                        ></i>
-                                        <i
-                                            className="bx bx-trash"
+                                        >
+                                            <i className="bx bx-edit"></i>
+                                        </button>
+                                        <button
+                                            className="icon-btn"
+                                            disabled={isLoading}
                                             onClick={() =>
                                                 handleDelete(post._id)
                                             }
-                                        ></i>
+                                        >
+                                            <i className="bx bx-trash"></i>
+                                        </button>
                                     </div>
                                 )}
                             </div>
@@ -84,12 +105,13 @@ export default function HomePage() {
                                     <div className="likes">
                                         <button
                                             className="like-button"
+                                            disabled={isLoading}
                                             onClick={() =>
                                                 toggleLikes(post._id)
                                             }
                                         >
                                             <i
-                                                class={
+                                                className={
                                                     post.likes.some(
                                                         (id) =>
                                                             id.toString() ===

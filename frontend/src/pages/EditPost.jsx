@@ -3,29 +3,43 @@ import { useNavigate } from "react-router-dom";
 import { usePosts } from "../../context/PostsContext";
 import { useParams } from "react-router-dom";
 import { useNotification } from "../../context/NotificationContext";
+import { useLoader } from "../../context/LoaderContext.jsx";
 import axios from "../utils/axios.js";
 
 export default function EditPost() {
     const navigate = useNavigate();
     const { showNotification } = useNotification();
+    const { isLoading, showLoader, hideLoader } = useLoader();
     const { id } = useParams();
     const { posts, editPost, insertPost } = usePosts();
     const [post, setPost] = useState([]);
 
     useEffect(() => {
-        const foundPost = posts.find((p) => p._id === id);
-        if (foundPost) {
-            setPost(foundPost);
-        } else {
-            axios
-                .get(`/api/posts/${id}`)
-                .then((res) => setPost(res.data))
-                .catch((err) => console.log(err));
-        }
+        const fetchPost = async () => {
+            const foundPost = posts.find((p) => p._id === id);
+
+            if (foundPost) {
+                setPost(foundPost);
+                return;
+            }
+
+            showLoader();
+            try {
+                const res = await axios.get(`/api/posts/${id}`);
+                setPost(res.data);
+            } catch (err) {
+                console.log(err);
+            } finally {
+                hideLoader();
+            }
+        };
+
+        fetchPost();
     }, [id, posts]);
 
     const handleEdit = async (e) => {
         e.preventDefault();
+        showLoader();
         try {
             const res = await axios.patch(`/api/posts/${id}`, post);
 
@@ -35,14 +49,20 @@ export default function EditPost() {
             );
         } catch (err) {
             showNotification(err?.message, "error", () => navigate("/"));
+        } finally {
+            hideLoader();
         }
     };
 
     return (
         <div className="edit-post-page">
             <div className="back-btn-holder">
-                <button className="back-btn" onClick={() => navigate("/")}>
-                    <i class="bx bx-arrow-back"></i>
+                <button
+                    className="back-btn"
+                    disabled={isLoading}
+                    onClick={() => navigate("/")}
+                >
+                    <i className="bx bx-arrow-back"></i>
                 </button>
             </div>
             <div className="edit-view">
@@ -51,17 +71,21 @@ export default function EditPost() {
                     <input
                         type="text"
                         value={post.title}
+                        disabled={isLoading}
                         onChange={(e) =>
                             setPost({ ...post, title: e.target.value })
                         }
                     />
                     <textarea
                         value={post.content}
+                        disabled={isLoading}
                         onChange={(e) =>
                             setPost({ ...post, content: e.target.value })
                         }
                     ></textarea>
-                    <button>Edit</button>
+                    <button type="submit" disabled={isLoading}>
+                        Edit
+                    </button>
                 </form>
             </div>
         </div>

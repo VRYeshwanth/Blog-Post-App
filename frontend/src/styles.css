@@ -388,6 +388,7 @@
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 1rem;
+    z-index: 500;
 }
 .notification * {
     background-color: var(--bg-secondary);
@@ -843,4 +844,8 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+.icon-btn {
+    border: none;
 }

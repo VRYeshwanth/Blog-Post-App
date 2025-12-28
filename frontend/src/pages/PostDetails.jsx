@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from "../../context/NotificationContext";
 import { usePosts } from "../../context/PostsContext";
+import { useLoader } from "../../context/LoaderContext.jsx";
 import CommentList from "../components/CommentList";
 import axios from "../utils/axios.js";
 
@@ -11,6 +12,7 @@ export default function PostDetails() {
     const navigate = useNavigate();
     const { showNotification } = useNotification();
     const { auth } = useAuth();
+    const { isLoading, showLoader, hideLoader } = useLoader();
     const { posts, deletePost } = usePosts();
     const [post, setPost] = useState([]);
     const [showForm, setShowForm] = useState(false);
@@ -18,6 +20,7 @@ export default function PostDetails() {
     const [comments, setComments] = useState([]);
 
     const handleDelete = async (id) => {
+        showLoader();
         try {
             await axios.delete(`/api/posts/${id}`);
             deletePost(id);
@@ -26,11 +29,14 @@ export default function PostDetails() {
             );
         } catch (err) {
             showNotification(err?.message, "error", () => navigate("/"));
+        } finally {
+            hideLoader();
         }
     };
 
     const handleAddComment = async (e) => {
         e.preventDefault();
+        showLoader();
         try {
             await axios.post("/api/comments", {
                 text,
@@ -43,20 +49,26 @@ export default function PostDetails() {
             setShowForm(false);
         } catch (err) {
             console.log(err);
+        } finally {
+            hideLoader();
         }
     };
 
     const handleDeleteComment = async (id) => {
+        showLoader();
         try {
             await axios.delete(`/api/comments/${id}`);
 
             setComments((prev) => prev.filter((c) => c._id !== id));
         } catch (err) {
             console.log(err);
+        } finally {
+            hideLoader();
         }
     };
 
     const handleEditComment = async (newText, id, e) => {
+        showLoader();
         try {
             const response = await axios.patch(`/api/comments/${id}`, {
                 text: newText,
@@ -69,35 +81,60 @@ export default function PostDetails() {
             );
         } catch (err) {
             console.log(err);
+        } finally {
+            hideLoader();
         }
     };
 
     useEffect(() => {
-        const foundPost = posts.find((p) => p._id === id);
-        if (foundPost) {
-            setPost(foundPost);
-        } else {
-            axios
-                .get(`/api/posts/${id}`)
-                .then((res) => setPost(res.data))
-                .catch((err) => console.log(err));
-        }
+        const fetchPost = async () => {
+            const foundPost = posts.find((p) => p._id === id);
+            if (foundPost) {
+                setPost(foundPost);
+                return;
+            }
+
+            showLoader();
+            try {
+                const res = await axios.get(`/api/posts/${id}`);
+                setPost(res.data);
+            } catch (err) {
+                console.log(err);
+            } finally {
+                hideLoader();
+            }
+        };
+
+        fetchPost();
     }, [id, posts]);
 
     useEffect(() => {
         if (!post._id) return;
 
-        axios
-            .get(`/api/comments/${post._id}`)
-            .then((res) => setComments(res.data))
-            .catch((err) => console.log(err));
+        const fetchComments = async () => {
+            showLoader();
+            try {
+                const res = await axios.get(`/api/comments/${post._id}`);
+                setComments(res.data);
+            } catch (err) {
+                console.log(err);
+            } finally {
+                hideLoader();
+            }
+        };
+
+        fetchComments();
     }, [post._id]);
 
     return (
         <div className="post-page">
             <div className="back-btn-holder">
-                <button className="back-btn" onClick={() => navigate("/")}>
-                    <i class="bx bx-arrow-back"></i>
+                <button
+                    className="back-btn"
+                    disabled={isLoading}
+                    onClick={() => navigate("/")}
+                >
+                    <i className="bx bx-arrow-back"></i>
                 </button>
             </div>
             <div className="post-view">
@@ -105,19 +142,25 @@ export default function PostDetails() {
                     <div className="left">
                         <h2>{post.title}</h2>
                     </div>
-                    {post?.author?._id == auth.userId && (
+                    {post?.author?._id === auth.userId && (
                         <div className="right">
                             <div className="edit-btns">
-                                <i
-                                    className="bx bx-edit"
+                                <button
+                                    className="icon-btn"
+                                    disabled={isLoading}
                                     onClick={() =>
                                         navigate(`/posts/edit/${post._id}`)
                                     }
-                                ></i>
-                                <i
-                                    className="bx bx-trash"
+                                >
+                                    <i className="bx bx-edit"></i>
+                                </button>
+                                <button
+                                    className="icon-btn"
+                                    disabled={isLoading}
                                     onClick={() => handleDelete(post._id)}
-                                ></i>
+                                >
+                                    <i className="bx bx-trash"></i>
+                                </button>
                             </div>
                         </div>
                     )}
@@ -142,9 +185,12 @@ export default function PostDetails() {
                             placeholder="Enter your comment : "
                             required
                             value={text}
+                            disabled={isLoading}
                             onChange={(e) => setText(e.target.value)}
                         ></textarea>
-                        <button type="submit">Post</button>
+                        <button type="submit" disabled={isLoading}>
+                            Post
+                        </button>
                     </form>
                 )}
                 <CommentList

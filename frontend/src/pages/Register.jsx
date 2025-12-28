@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNotification } from "../../context/NotificationContext";
+import { useLoader } from "../../context/LoaderContext.jsx";
 import axios from "../utils/axios.js";
 
 export default function Register() {
     const navigate = useNavigate();
     const { showNotification } = useNotification();
-
+    const { isLoading, showLoader, hideLoader } = useLoader();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     async function registerUser(e) {
         e.preventDefault();
+        showLoader();
         try {
             const response = await axios.post("/api/auth/register", {
                 username,
@@ -24,16 +26,22 @@ export default function Register() {
                 navigate("/login")
             );
         } catch (err) {
-            showNotification(err.response.data.error, "error", () =>
+            showNotification(err?.response?.data?.error, "error", () =>
                 navigate("/register")
             );
+        } finally {
+            hideLoader();
         }
     }
 
     return (
         <div className="page-container">
-            <button className="back-btn" onClick={() => navigate("/")}>
-                <i class="bx bx-arrow-back"></i>
+            <button
+                className="back-btn"
+                disabled={isLoading}
+                onClick={() => navigate("/")}
+            >
+                <i className="bx bx-arrow-back"></i>
             </button>
             <div className="register-box">
                 <h1>Register</h1>
@@ -45,6 +53,7 @@ export default function Register() {
                     <input
                         type="text"
                         value={username}
+                        disabled={isLoading}
                         onChange={(e) => {
                             setUsername(e.target.value);
                         }}
@@ -55,6 +64,7 @@ export default function Register() {
                     <input
                         type="email"
                         value={email}
+                        disabled={isLoading}
                         onChange={(e) => {
                             setEmail(e.target.value);
                         }}
@@ -65,6 +75,7 @@ export default function Register() {
                     <input
                         type="password"
                         value={password}
+                        disabled={isLoading}
                         onChange={(e) => {
                             setPassword(e.target.value);
                         }}
@@ -72,7 +83,9 @@ export default function Register() {
                         required
                     />
 
-                    <button type="submit">Register</button>
+                    <button type="submit" disabled={isLoading}>
+                        Register
+                    </button>
                 </form>
             </div>
         </div>
