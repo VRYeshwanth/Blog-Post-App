@@ -38,6 +38,9 @@ export default function Login() {
 
     return (
         <div className="page-container">
+            <button className="back-btn" onClick={() => navigate("/")}>
+                <i class="bx bx-arrow-back"></i>
+            </button>
             <div className="login-box">
                 <h1>Login</h1>
                 <form method="post" onSubmit={loginUser} className="login-form">

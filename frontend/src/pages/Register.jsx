@@ -32,6 +32,9 @@ export default function Register() {
 
     return (
         <div className="page-container">
+            <button className="back-btn" onClick={() => navigate("/")}>
+                <i class="bx bx-arrow-back"></i>
+            </button>
             <div className="register-box">
                 <h1>Register</h1>
                 <form

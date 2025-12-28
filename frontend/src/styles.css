@@ -44,10 +44,17 @@
 
 .page-container {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 80px);
+}
+
+.page-container > .back-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
 /* Navbar */
