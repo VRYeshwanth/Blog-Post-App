@@ -142,7 +142,7 @@ export default function PostDetails() {
                     <div className="left">
                         <h2>{post.title}</h2>
                     </div>
-                    {post?.author?._id === auth.userId && (
+                    {post?.author?._id === auth.user?.id && (
                         <div className="right">
                             <div className="edit-btns">
                                 <button
@@ -173,7 +173,7 @@ export default function PostDetails() {
             <div className="comment-view">
                 <div className="comment-view-heading">
                     <h1 className="comment-heading">Comments</h1>
-                    {auth.userId && (
+                    {auth.user?.id && (
                         <button onClick={() => setShowForm(!showForm)}>
                             +
                         </button>

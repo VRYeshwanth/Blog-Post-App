@@ -12,7 +12,7 @@ export default function Comment({ comment, onDelete, onEdit }) {
                 <div className="username">
                     <h3>{comment.userId.username}</h3>
                 </div>
-                {auth.userId === comment.userId._id && (
+                {auth.user?.id === comment.userId._id && (
                     <div className="header-btns">
                         <i
                             className="bx bx-edit"

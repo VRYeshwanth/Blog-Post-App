@@ -74,7 +74,7 @@ export default function HomePage() {
                                 >
                                     Read More
                                 </button>
-                                {post.author._id === auth.userId && (
+                                {post.author._id === auth.user?.id && (
                                     <div className="edit-btns">
                                         <button
                                             className="icon-btn"
@@ -115,7 +115,7 @@ export default function HomePage() {
                                                     post.likes.some(
                                                         (id) =>
                                                             id.toString() ===
-                                                            auth.userId
+                                                            auth.user?.id
                                                     )
                                                         ? "bx bxs-like"
                                                         : "bx bx-like"
