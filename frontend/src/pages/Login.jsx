@@ -24,10 +24,8 @@ export default function Login() {
                 password,
             });
 
-            const token = response.data.token;
-            const userId = response.data.user.id;
-
-            login(token, userId);
+            const { token, user } = response.data;
+            login(token, user);
 
             showNotification("Login Successful !!", "success", () =>
                 navigate("/")
