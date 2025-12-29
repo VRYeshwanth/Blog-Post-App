@@ -1,4 +1,5 @@
 import Post from "../models/Post.js";
+import Comment from "../models/Comment.js";
 
 export const getPosts = async (req, res) => {
     try {
@@ -45,7 +46,7 @@ export const updatePost = async (req, res) => {
         const existingPost = await Post.findOne({ _id: id });
 
         if (!existingPost)
-            return res.status(400).json({ error: "Post not found!!" });
+            return res.status(404).json({ error: "Post not found!!" });
 
         if (existingPost.author.toString() !== req.userId)
             return res.status(400).json({ error: "Access Denied !!" });
@@ -65,9 +66,15 @@ export const deletePost = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const existingPost = await Post.findOne({ _id: id });
+        const existingPost = await Post.findById(id);
+
+        if (!existingPost)
+            return res.status(404).json({ error: "Post not found" });
+
         if (existingPost.author.toString() !== req.userId)
-            return res.status(400).json({ error: "Access Denied !!" });
+            return res.status(403).json({ error: "Access Denied !!" });
+
+        await Comment.deleteMany({ postId: id });
 
         await Post.deleteOne({ _id: id });
 
