@@ -25,6 +25,76 @@ A full-stack blogging application built using the MERN stack (MongoDB, Express, 
 -   Authentication using JWT tokens
 -   Context-based state management for posts and notifications
 -   Responsive UI
+-   Support for Light and Dark themes
+-   Post like feature
+-   Reusable global loader component
+
+## 📁 Project Structure
+
+```
+Directory structure:
+└── Blog-Post-App/
+    ├── backend/
+    │   ├── controllers/
+    │   │   ├── authController.js
+    │   │   ├── commentController.js
+    │   │   └── postController.js
+    │   ├── middleware/
+    │   │   └── authMiddleware.js
+    │   ├── models/
+    │   │   ├── Comment.js
+    │   │   ├── Post.js
+    │   │   └── User.js
+    │   ├── package-lock.json
+    │   ├── package.json
+    │   ├── routes/
+    │   │   ├── authRoutes.js
+    │   │   ├── commentRoutes.js
+    │   │   └── postRoutes.js
+    │   └── server.js
+    ├── frontend/
+    │   ├── context/
+    │   │   ├── AuthContext.jsx
+    │   │   ├── LoaderContext.jsx
+    │   │   ├── NotificationContext.jsx
+    │   │   ├── PostsContext.jsx
+    │   │   └── ThemeContext.jsx
+    │   ├── eslint.config.js
+    │   ├── index.html
+    │   ├── package-lock.json
+    │   ├── package.json
+    │   ├── screenshots/
+    │   │   ├── AddPostPage.png
+    │   │   ├── Comment_Section.png
+    │   │   ├── EditPostPage.png
+    │   │   ├── HomePage.png
+    │   │   ├── HomePage_Login.png
+    │   │   ├── LoginPage.png
+    │   │   ├── PostDetails.png
+    │   │   └── RegisterPage.png
+    │   ├── src/
+    │   │   ├── App.jsx
+    │   │   ├── components/
+    │   │   │   ├── Comment.jsx
+    │   │   │   ├── CommentList.jsx
+    │   │   │   ├── Loader.jsx
+    │   │   │   ├── Navbar.jsx
+    │   │   │   └── Notification.jsx
+    │   │   ├── main.jsx
+    │   │   ├── pages/
+    │   │   │   ├── CreatePost.jsx
+    │   │   │   ├── EditPost.jsx
+    │   │   │   ├── HomePage.jsx
+    │   │   │   ├── Login.jsx
+    │   │   │   ├── PostDetails.jsx
+    │   │   │   └── Register.jsx
+    │   │   ├── styles.css
+    │   │   └── utils/
+    │   │       ├── axios.js
+    │   │       └── formatTime.js
+    │   └── vite.config.js
+    └── README.md
+```
 
 ## ⚙️ Setup Instructions
 
@@ -127,6 +197,10 @@ Here are some screenshots of the MERN Blog App in action:
 ### Edit Post Page
 
 ![Edit Post Page](./frontend/screenshots/EditPostPage.png)
+
+### Comment Section
+
+![Comment Section](./frontend/screenshots/Comment_Section.png)
 
 ## 🤝 Contributing
 
