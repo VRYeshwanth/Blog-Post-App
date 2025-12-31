@@ -58,7 +58,9 @@ export default function Navbar() {
                                     <small>{auth.user?.email}</small>
                                 </div>
                                 <hr />
-                                <button>Profile</button>
+                                <button onClick={() => navigate("/profile")}>
+                                    Profile
+                                </button>
                                 <button>Dashboard</button>
                                 <hr />
                                 <button onClick={handleLogout}>Logout</button>
