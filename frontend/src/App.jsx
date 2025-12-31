@@ -9,6 +9,7 @@ import Notification from "./components/Notification";
 import PostDetails from "./pages/PostDetails";
 import CreatePost from "./pages/CreatePost";
 import EditPost from "./pages/EditPost";
+import Profile from "./pages/Profile";
 
 export default function App() {
     useEffect(() => {
@@ -41,6 +42,7 @@ export default function App() {
                 <Route path="/posts/:id" element={<PostDetails />} />
                 <Route path="/posts/create" element={<CreatePost />} />
                 <Route path="/posts/edit/:id" element={<EditPost />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         </HashRouter>
     );
