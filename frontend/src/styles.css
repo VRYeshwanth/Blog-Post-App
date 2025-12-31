@@ -941,3 +941,15 @@
 .dropdown button:last-child:hover {
     background: rgba(248, 113, 113, 0.15);
 }
+
+/* Avatar Styles */
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--read-more);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 50%;
+    letter-spacing: 1px;
+}
