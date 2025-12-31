@@ -20,3 +20,30 @@ export const getProfileDetails = async (req, res) => {
         return res.status(500).json({ error: err.message });
     }
 };
+
+export const updateProfileDetails = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { username, email } = req.body;
+
+        const user = await User.findById(userId);
+
+        if (!user)
+            return res.status(404).json({ message: "Profile not found" });
+
+        if (username !== undefined) user.username = username;
+        if (email !== undefined) user.email = email;
+
+        await user.save();
+
+        return res.status(200).json({
+            message: "Profile updated successfully !!",
+            details: {
+                username: user.username,
+                email: user.email,
+            },
+        });
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+};
