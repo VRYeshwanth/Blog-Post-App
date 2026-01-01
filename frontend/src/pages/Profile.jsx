@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
-import axios from "axios";
+import { useLoader } from "../../context/LoaderContext";
+import axios from "../utils/axios.js";
 import Avatar from "../components/Avatar";
 
 export default function Profile() {
@@ -10,24 +11,28 @@ export default function Profile() {
         email: "",
     });
     const [isEditing, setIsEditing] = useState(false);
-    const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+
     const { auth, updateUser } = useAuth();
+    const { showLoader, hideLoader } = useLoader();
 
     useEffect(() => {
+        let isMounted = true;
+
         async function fetchDetails() {
             try {
+                showLoader();
+
                 const token = localStorage.getItem("token");
                 if (!token) return;
 
-                const response = await axios.get(
-                    "http://localhost:3000/api/profile",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
+                const response = await axios.get("/api/profile", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!isMounted) return;
 
                 setProfileDetails(response.data.details);
                 setFormData({
@@ -37,20 +42,31 @@ export default function Profile() {
             } catch (err) {
                 console.error("Failed to fetch profile details:", err);
             } finally {
-                setLoading(false);
+                hideLoader();
             }
         }
 
         fetchDetails();
-    }, []);
+
+        return () => {
+            isMounted = false;
+        };
+    }, [showLoader, hideLoader]);
 
     async function handleSave() {
+        if (!formData.username.trim() || !formData.email.trim()) {
+            alert("Username and email cannot be empty");
+            return;
+        }
+
         try {
             setSaving(true);
+            showLoader();
+
             const token = localStorage.getItem("token");
 
             const response = await axios.patch(
-                "http://localhost:3000/api/profile",
+                "/api/profile",
                 {
                     username: formData.username,
                     email: formData.email,
@@ -64,21 +80,26 @@ export default function Profile() {
 
             setProfileDetails(response.data.details);
 
-            updateUser({
-                ...auth.user,
-                username: response.data.details.username,
-                email: response.data.details.email,
-            });
+            if (auth?.user) {
+                updateUser({
+                    ...auth.user,
+                    username: response.data.details.username,
+                    email: response.data.details.email,
+                });
+            }
 
             setIsEditing(false);
         } catch (err) {
             console.error("Failed to update profile:", err);
         } finally {
             setSaving(false);
+            hideLoader();
         }
     }
 
     function handleCancel() {
+        if (!profileDetails) return;
+
         setFormData({
             username: profileDetails.username,
             email: profileDetails.email,
@@ -86,8 +107,8 @@ export default function Profile() {
         setIsEditing(false);
     }
 
-    if (loading) {
-        return <p>Loading ...</p>;
+    if (!profileDetails) {
+        return null; // loader handles the UI
     }
 
     return (
