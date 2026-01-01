@@ -24,7 +24,7 @@ export const createComment = async (req, res) => {
 
         const newComment = await Comment.create({
             text: text,
-            userId: req.userId,
+            userId: req.user.id,
             postId: postId,
         });
 
@@ -44,7 +44,7 @@ export const editComment = async (req, res) => {
         if (!existingComment)
             return res.status(400).json({ error: "No Comment found !!" });
 
-        if (existingComment.userId.toString() !== req.userId)
+        if (existingComment.userId.toString() !== req.user.id)
             return res.status(400).json({ error: "Access Denied !!" });
 
         existingComment.text = text;
@@ -64,7 +64,7 @@ export const deleteComment = async (req, res) => {
 
         const existingComment = await Comment.findOne({ _id: id });
 
-        if (existingComment.userId.toString() !== req.userId)
+        if (existingComment.userId.toString() !== req.user.id)
             return res.status(400).json({ error: "Access Denied !!" });
 
         await Comment.deleteOne({ _id: id });

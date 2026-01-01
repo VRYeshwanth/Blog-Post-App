@@ -29,7 +29,7 @@ export const createPost = async (req, res) => {
         const response = await Post.create({
             title: title,
             content: content,
-            author: req.userId,
+            author: req.user.id,
         });
 
         res.status(201).json(response);
@@ -48,7 +48,7 @@ export const updatePost = async (req, res) => {
         if (!existingPost)
             return res.status(404).json({ error: "Post not found!!" });
 
-        if (existingPost.author.toString() !== req.userId)
+        if (existingPost.author.toString() !== req.user.id)
             return res.status(400).json({ error: "Access Denied !!" });
 
         existingPost.title = title;
@@ -71,7 +71,7 @@ export const deletePost = async (req, res) => {
         if (!existingPost)
             return res.status(404).json({ error: "Post not found" });
 
-        if (existingPost.author.toString() !== req.userId)
+        if (existingPost.author.toString() !== req.user.id)
             return res.status(403).json({ error: "Access Denied !!" });
 
         await Comment.deleteMany({ postId: id });
@@ -87,7 +87,7 @@ export const deletePost = async (req, res) => {
 export const handleLikes = async (req, res) => {
     try {
         const { id } = req.params;
-        const userId = req.userId;
+        const userId = req.user.id;
 
         const existingPost = await Post.findOne({ _id: id });
 
