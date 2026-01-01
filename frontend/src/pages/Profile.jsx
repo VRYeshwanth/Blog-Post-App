@@ -51,7 +51,7 @@ export default function Profile() {
         return () => {
             isMounted = false;
         };
-    }, [showLoader, hideLoader]);
+    }, []);
 
     async function handleSave() {
         if (!formData.username.trim() || !formData.email.trim()) {
@@ -108,7 +108,7 @@ export default function Profile() {
     }
 
     if (!profileDetails) {
-        return null; // loader handles the UI
+        return null;
     }
 
     return (
