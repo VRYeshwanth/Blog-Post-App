@@ -1,3 +1,4 @@
+import "./Avatar.css";
 export default function Avatar({ username, size = "40px" }) {
     const getInitials = (name) => {
         if (!name.trim()) return "?";

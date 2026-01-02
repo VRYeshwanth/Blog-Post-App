@@ -1,33 +1,39 @@
+import "./Login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useNotification } from "../../context/NotificationContext";
-import { useLoader } from "../../context/LoaderContext.jsx";
-import axios from "../utils/axios.js";
+import { useAuth } from "../../../context/AuthContext.jsx";
+import { useNotification } from "../../../context/NotificationContext.jsx";
+import { useLoader } from "../../../context/LoaderContext.jsx";
+import axios from "../../utils/axios.js";
 
-export default function Register() {
+export default function Login() {
     const navigate = useNavigate();
     const { showNotification } = useNotification();
     const { isLoading, showLoader, hideLoader } = useLoader();
-    const [username, setUsername] = useState("");
+
+    const { login } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    async function registerUser(e) {
+    async function loginUser(e) {
         e.preventDefault();
+
         showLoader();
         try {
-            const response = await axios.post("/api/auth/register", {
-                username,
+            const response = await axios.post("/api/auth/login", {
                 email,
                 password,
             });
 
-            showNotification("Registration Successful !!", "success", () =>
-                navigate("/login")
+            const { token, user } = response.data;
+            login(token, user);
+
+            showNotification("Login Successful !!", "success", () =>
+                navigate("/")
             );
         } catch (err) {
             showNotification(err?.response?.data?.error, "error", () =>
-                navigate("/register")
+                navigate("/login")
             );
         } finally {
             hideLoader();
@@ -43,32 +49,15 @@ export default function Register() {
             >
                 <i className="bx bx-arrow-back"></i>
             </button>
-            <div className="register-box">
-                <h1>Register</h1>
-                <form
-                    method="post"
-                    onSubmit={registerUser}
-                    className="register-form"
-                >
-                    <input
-                        type="text"
-                        value={username}
-                        disabled={isLoading}
-                        onChange={(e) => {
-                            setUsername(e.target.value);
-                        }}
-                        placeholder="Enter your Username : "
-                        required
-                    />
-
+            <div className="login-box">
+                <h1>Login</h1>
+                <form method="post" onSubmit={loginUser} className="login-form">
                     <input
                         type="email"
                         value={email}
                         disabled={isLoading}
-                        onChange={(e) => {
-                            setEmail(e.target.value);
-                        }}
-                        placeholder="Enter your email address : "
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your Email address : "
                         required
                     />
 
@@ -76,15 +65,13 @@ export default function Register() {
                         type="password"
                         value={password}
                         disabled={isLoading}
-                        onChange={(e) => {
-                            setPassword(e.target.value);
-                        }}
+                        onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter your password : "
                         required
                     />
 
                     <button type="submit" disabled={isLoading}>
-                        Register
+                        Login
                     </button>
                 </form>
             </div>

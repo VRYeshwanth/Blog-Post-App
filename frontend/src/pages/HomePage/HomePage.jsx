@@ -1,10 +1,11 @@
-import axios from "../utils/axios.js";
+import "./HomePage.css";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import { useNotification } from "../../context/NotificationContext";
-import { usePosts } from "../../context/PostsContext";
-import { useLoader } from "../../context/LoaderContext.jsx";
+import { useAuth } from "../../../context/AuthContext.jsx";
+import { useNotification } from "../../../context/NotificationContext.jsx";
+import { usePosts } from "../../../context/PostsContext.jsx";
+import { useLoader } from "../../../context/LoaderContext.jsx";
+import axios from "../../utils/axios.js";
 
 export default function HomePage() {
     const { posts, setAllPosts, deletePost, editPost } = usePosts();

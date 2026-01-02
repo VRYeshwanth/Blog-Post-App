@@ -1,10 +1,11 @@
+import "./EditPost.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { usePosts } from "../../context/PostsContext";
+import { usePosts } from "../../../context/PostsContext.jsx";
 import { useParams } from "react-router-dom";
-import { useNotification } from "../../context/NotificationContext";
-import { useLoader } from "../../context/LoaderContext.jsx";
-import axios from "../utils/axios.js";
+import { useNotification } from "../../../context/NotificationContext.jsx";
+import { useLoader } from "../../../context/LoaderContext.jsx";
+import axios from "../../utils/axios.js";
 
 export default function EditPost() {
     const navigate = useNavigate();

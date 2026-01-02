@@ -1,3 +1,4 @@
+import "./CommentStyles.css";
 import Comment from "./Comment";
 
 export default function CommentList({ comments, showForm, onDelete, onEdit }) {

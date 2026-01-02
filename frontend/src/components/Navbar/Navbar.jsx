@@ -1,6 +1,7 @@
+import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import { useTheme } from "../../context/ThemeContext";
+import { useAuth } from "../../../context/AuthContext";
+import { useTheme } from "../../../context/ThemeContext";
 import { useState, useEffect, useRef } from "react";
 
 export default function Navbar() {

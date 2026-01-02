@@ -1,11 +1,12 @@
+import "./PostDetails.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { useNotification } from "../../context/NotificationContext";
-import { usePosts } from "../../context/PostsContext";
-import { useLoader } from "../../context/LoaderContext.jsx";
-import CommentList from "../components/CommentList";
-import axios from "../utils/axios.js";
+import { useAuth } from "../../../context/AuthContext.jsx";
+import { useNotification } from "../../../context/NotificationContext.jsx";
+import { usePosts } from "../../../context/PostsContext.jsx";
+import { useLoader } from "../../../context/LoaderContext.jsx";
+import CommentList from "../../components/Comment/CommentList.jsx";
+import axios from "../../utils/axios.js";
 
 export default function PostDetails() {
     const { id } = useParams();

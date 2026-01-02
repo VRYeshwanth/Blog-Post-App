@@ -1,0 +1,42 @@
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(90vw, 500px);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    z-index: 500;
+}
+.notification * {
+    background-color: var(--bg-secondary);
+}
+
+.notification-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1.5rem;
+}
+.notification-btn > button {
+    font-size: 1.4rem;
+    padding: 0.2rem 0.8rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.notification.success > .notification-btn > button {
+    background-color: var(--edit);
+}
+.notification.success > .notification-btn > button:hover {
+    background-color: var(--edit-hover);
+}
+.notification.error > .notification-btn > button {
+    background-color: var(--delete);
+}
+.notification.error > .notification-btn > button:hover {
+    background-color: var(--delete-hover);
+}

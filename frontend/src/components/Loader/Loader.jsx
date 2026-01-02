@@ -1,4 +1,5 @@
-import { useLoader } from "../../context/LoaderContext";
+import "./Loader.css";
+import { useLoader } from "../../../context/LoaderContext";
 
 export default function Loader() {
     const { isLoading } = useLoader();

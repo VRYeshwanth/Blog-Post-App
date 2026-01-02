@@ -1,15 +1,15 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import HomePage from "./pages/HomePage";
-import Navbar from "./components/Navbar";
-import Notification from "./components/Notification";
-import PostDetails from "./pages/PostDetails";
-import CreatePost from "./pages/CreatePost";
-import EditPost from "./pages/EditPost";
-import Profile from "./pages/Profile";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
+import HomePage from "./pages/HomePage/HomePage";
+import Navbar from "./components/Navbar/Navbar";
+import Notification from "./components/Notification/Notification";
+import PostDetails from "./pages/PostDetails/PostDetails";
+import CreatePost from "./pages/CreatePost/CreatePost";
+import EditPost from "./pages/EditPost/EditPost";
+import Profile from "./pages/Profile/Profile";
 
 export default function App() {
     useEffect(() => {

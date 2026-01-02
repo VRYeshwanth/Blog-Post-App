@@ -1,9 +1,10 @@
+import "./CreatePost.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useNotification } from "../../context/NotificationContext";
-import { usePosts } from "../../context/PostsContext";
-import { useLoader } from "../../context/LoaderContext.jsx";
-import axios from "../utils/axios.js";
+import { useNotification } from "../../../context/NotificationContext.jsx";
+import { usePosts } from "../../../context/PostsContext.jsx";
+import { useLoader } from "../../../context/LoaderContext.jsx";
+import axios from "../../utils/axios.js";
 
 export default function CreatePost() {
     const navigate = useNavigate();

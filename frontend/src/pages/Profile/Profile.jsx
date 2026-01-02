@@ -1,8 +1,9 @@
+import "./Profile.css";
 import { useState, useEffect } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { useLoader } from "../../context/LoaderContext";
-import axios from "../utils/axios.js";
-import Avatar from "../components/Avatar";
+import { useAuth } from "../../../context/AuthContext.jsx";
+import { useLoader } from "../../../context/LoaderContext.jsx";
+import axios from "../../utils/axios.js";
+import Avatar from "../../components/Avatar/Avatar.jsx";
 
 export default function Profile() {
     const [profileDetails, setProfileDetails] = useState(null);
