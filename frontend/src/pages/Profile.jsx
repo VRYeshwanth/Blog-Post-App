@@ -26,11 +26,7 @@ export default function Profile() {
                 const token = localStorage.getItem("token");
                 if (!token) return;
 
-                const response = await axios.get("/api/profile", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                const response = await axios.get("/api/profile");
 
                 if (!isMounted) return;
 
@@ -65,18 +61,10 @@ export default function Profile() {
 
             const token = localStorage.getItem("token");
 
-            const response = await axios.patch(
-                "/api/profile",
-                {
-                    username: formData.username,
-                    email: formData.email,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            const response = await axios.patch("/api/profile", {
+                username: formData.username,
+                email: formData.email,
+            });
 
             setProfileDetails(response.data.details);
 
