@@ -46,12 +46,12 @@ export default function Navbar() {
                     </button>
 
                     <div className="user-menu" ref={menuRef}>
-                        <button
-                            className="avatar-btn"
+                        <Avatar
+                            username={auth.user?.username}
+                            size="46px"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        >
-                            <i className="bx bx-user-circle"></i>
-                        </button>
+                            clickable={true}
+                        />
 
                         {isMenuOpen && (
                             <div className="dropdown">

@@ -7,4 +7,9 @@
     font-weight: 600;
     border-radius: 50%;
     letter-spacing: 1px;
+    user-select: none;
+}
+
+.avatar--clickable {
+    cursor: pointer;
 }

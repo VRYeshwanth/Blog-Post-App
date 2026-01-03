@@ -81,20 +81,6 @@
     position: relative;
 }
 
-.avatar-btn {
-    background: var(--read-more);
-    border: none;
-    font-size: 1.4rem;
-    padding: 0.6rem 0.8rem;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #fff;
-}
-
-.avatar-btn > i {
-    background-color: var(--read-more);
-}
-
 .dropdown {
     position: absolute;
     right: 0;

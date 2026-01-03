@@ -1,7 +1,12 @@
 import "./Avatar.css";
-export default function Avatar({ username, size = "40px" }) {
+export default function Avatar({
+    username,
+    size = "40px",
+    onClick,
+    clickable = false,
+}) {
     const getInitials = (name) => {
-        if (!name.trim()) return "?";
+        if (!name || typeof name !== "string") return "";
 
         const words = name
             .trim()
@@ -15,12 +20,15 @@ export default function Avatar({ username, size = "40px" }) {
 
     return (
         <div
-            className="avatar"
+            className={`avatar ${clickable ? "avatar--clickable" : ""}`}
             style={{
                 width: size,
                 height: size,
                 fontSize: `calc(${size} * 0.4)`,
             }}
+            role={clickable ? "button" : undefined}
+            tabIndex={clickable ? 0 : undefined}
+            onClick={clickable ? onClick : undefined}
         >
             {getInitials(username)}
         </div>
