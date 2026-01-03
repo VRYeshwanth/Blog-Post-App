@@ -113,6 +113,9 @@
 
 .user-info {
     padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .user-info strong {

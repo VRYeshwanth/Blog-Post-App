@@ -1,4 +1,5 @@
 import "./Navbar.css";
+import Avatar from "../Avatar/Avatar";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import { useTheme } from "../../../context/ThemeContext";
@@ -55,14 +56,19 @@ export default function Navbar() {
                         {isMenuOpen && (
                             <div className="dropdown">
                                 <div className="user-info">
-                                    <strong>{auth.user?.username}</strong>
-                                    <small>{auth.user?.email}</small>
+                                    <Avatar username={auth.user?.username} />
+                                    <div className="user-details">
+                                        <strong>{auth.user?.username}</strong>
+                                        <small>{auth.user?.email}</small>
+                                    </div>
                                 </div>
                                 <hr />
                                 <button onClick={() => navigate("/profile")}>
                                     Profile
                                 </button>
-                                <button>Dashboard</button>
+                                <button onClick={() => navigate("/dashboard")}>
+                                    Dashboard
+                                </button>
                                 <hr />
                                 <button onClick={handleLogout}>Logout</button>
                             </div>
