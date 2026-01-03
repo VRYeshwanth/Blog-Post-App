@@ -10,6 +10,7 @@ import PostDetails from "./pages/PostDetails/PostDetails";
 import CreatePost from "./pages/CreatePost/CreatePost";
 import EditPost from "./pages/EditPost/EditPost";
 import Profile from "./pages/Profile/Profile";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 export default function App() {
     useEffect(() => {
@@ -43,6 +44,7 @@ export default function App() {
                 <Route path="/posts/create" element={<CreatePost />} />
                 <Route path="/posts/edit/:id" element={<EditPost />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </HashRouter>
     );

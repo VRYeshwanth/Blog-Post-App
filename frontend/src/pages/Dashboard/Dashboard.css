@@ -1,0 +1,65 @@
+.dashboard-container {
+    padding: 2rem;
+    background-color: var(--bg-primary);
+    min-height: calc(100vh - 80px);
+    color: var(--color);
+}
+
+.dashboard-overview {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.dashboard-overview h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.dashboard-overview p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    color: #94a3b8;
+}
+
+.overview-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.statistics-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.dark .statistics-card {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.statistics-card > * {
+    background-color: var(--bg-secondary);
+}
+
+.statistics-card i {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.statistics-card span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #94a3b8;
+}
+
+.statistics-card h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color);
+    margin-top: 0.2rem;
+}
