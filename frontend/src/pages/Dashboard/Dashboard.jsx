@@ -1,6 +1,7 @@
 import StatisticCard from "./StatisticCard";
 import "./Dashboard.css";
 import axios from "../../utils/axios.js";
+import { formatDate } from "../../utils/formatDate.js";
 import { useLoader } from "../../../context/LoaderContext";
 import { useState, useEffect } from "react";
 
@@ -38,6 +39,12 @@ export default function Dashboard() {
                 <p>Welcome back {dashboardData.user.username}</p>
                 <div className="overview-layout">
                     <StatisticCard
+                        icon="bx bxs-calendar"
+                        statistic="Joined Date"
+                        value={formatDate(dashboardData.user?.joinedAt)}
+                        color="#3B82F6"
+                    />
+                    <StatisticCard
                         icon="bx bxs-notepad"
                         statistic="Total Posts"
                         value={dashboardData.stats.posts}
@@ -47,11 +54,11 @@ export default function Dashboard() {
                         icon="bx bxs-message-detail"
                         statistic="Total Comments"
                         value={dashboardData.stats.comments}
-                        color="#3B82F6"
+                        color="#A855F7"
                     />
                     <StatisticCard
                         icon="bx bxs-heart"
-                        statistic="Total Likes"
+                        statistic="Posts Liked"
                         value={dashboardData.stats.totalLikes}
                         color="#EC4899"
                     />
