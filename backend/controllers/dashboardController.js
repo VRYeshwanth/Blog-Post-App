@@ -18,23 +18,7 @@ export const getDashboardDetails = async (req, res) => {
         const commentsCount = await Comment.countDocuments({
             userId: userObjectId,
         });
-
-        const likesAggr = await Post.aggregate([
-            { $match: { author: userObjectId } },
-            {
-                $project: {
-                    likesCount: { $size: "$likes" },
-                },
-            },
-            {
-                $group: {
-                    _id: null,
-                    totalLikes: { $sum: "$likesCount" },
-                },
-            },
-        ]);
-
-        const totalLikes = likesAggr.length > 0 ? likesAggr[0].totalLikes : 0;
+        const likesCount = await Post.countDocuments({ likes: userObjectId });
 
         res.status(200).json({
             user: {
@@ -45,7 +29,7 @@ export const getDashboardDetails = async (req, res) => {
             stats: {
                 posts: postsCount,
                 comments: commentsCount,
-                totalLikes,
+                totalLikes: likesCount,
             },
         });
     } catch (err) {
