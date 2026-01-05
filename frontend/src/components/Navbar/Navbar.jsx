@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import { useTheme } from "../../../context/ThemeContext";
 import { useState, useEffect, useRef } from "react";
+import { useLoader } from "../../../context/LoaderContext.jsx";
 import axios from "../../utils/axios.js";
 
 export default function Navbar() {
@@ -12,6 +13,7 @@ export default function Navbar() {
     const { auth, logout } = useAuth();
     const { showNotification } = useNotification();
     const { theme, toggleTheme } = useTheme();
+    const { isLoading, showLoader, hideLoader } = useLoader();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef(null);
@@ -27,6 +29,7 @@ export default function Navbar() {
             confirmText: "Delete",
             cancelText: "Cancel",
             onConfirm: async () => {
+                showLoader();
                 try {
                     await axios.delete("/api/profile", {
                         withCredentials: true,
@@ -49,6 +52,8 @@ export default function Navbar() {
                             "Failed to delete account",
                         confirmText: "Ok",
                     });
+                } finally {
+                    hideLoader();
                 }
             },
         });
