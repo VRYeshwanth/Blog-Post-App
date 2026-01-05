@@ -1,17 +1,58 @@
 import "./Navbar.css";
 import Avatar from "../Avatar/Avatar";
+import { useNotification } from "../../../context/NotificationContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import { useTheme } from "../../../context/ThemeContext";
 import { useState, useEffect, useRef } from "react";
+import axios from "../../utils/axios.js";
 
 export default function Navbar() {
     const navigate = useNavigate();
     const { auth, logout } = useAuth();
+    const { showNotification } = useNotification();
     const { theme, toggleTheme } = useTheme();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef(null);
+
+    function handleAccountDeletion() {
+        setIsMenuOpen(false);
+
+        showNotification({
+            type: "danger",
+            title: "Delete Account",
+            message:
+                "This action is permanent. All your posts, comments and likes will be deleted.",
+            confirmText: "Delete",
+            cancelText: "Cancel",
+            onConfirm: async () => {
+                try {
+                    await axios.delete("/api/profile", {
+                        withCredentials: true,
+                    });
+
+                    showNotification({
+                        type: "success",
+                        message: "Your account has been deleted successfully.",
+                        confirmText: "Ok",
+                        onConfirm: () => {
+                            logout();
+                            navigate("/register");
+                        },
+                    });
+                } catch (err) {
+                    showNotification({
+                        type: "error",
+                        message:
+                            err?.response?.data?.message ||
+                            "Failed to delete account",
+                        confirmText: "Ok",
+                    });
+                }
+            },
+        });
+    }
 
     function handleLogout() {
         logout();
@@ -71,6 +112,9 @@ export default function Navbar() {
                                 </button>
                                 <hr />
                                 <button onClick={handleLogout}>Logout</button>
+                                <button onClick={handleAccountDeletion}>
+                                    Delete Account
+                                </button>
                             </div>
                         )}
                     </div>

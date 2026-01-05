@@ -135,6 +135,17 @@
     cursor: pointer;
 }
 
+.dropdown button:last-child {
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 500;
+    text-align: center;
+    background-color: var(--delete);
+}
+.dropdown button:last-child:hover {
+    background-color: var(--delete-hover) !important;
+}
+
 .dark .dropdown button {
     color: #e5e7eb;
 }
@@ -153,9 +164,9 @@
     background: rgba(255, 255, 255, 0.15);
 }
 
-.dropdown button:last-child {
+.dropdown button:nth-last-child(2) {
     color: #e74c3c;
 }
-.dropdown button:last-child:hover {
+.dropdown button:nth-last-child(2):hover {
     background: rgba(248, 113, 113, 0.15);
 }
