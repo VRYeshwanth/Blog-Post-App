@@ -25,11 +25,19 @@ export default function CreatePost() {
 
             insertPost(response.data);
 
-            showNotification("Post Successfully Created !!", "success", () =>
-                navigate("/")
-            );
+            showNotification({
+                message: "Post Successfully Created !!",
+                type: "success",
+                confirmText: "Ok",
+                onConfirm: () => navigate("/"),
+            });
         } catch (err) {
-            showNotification(err?.message, "error", () => navigate("/"));
+            showNotification({
+                message: err?.message || "Something went wrong",
+                type: "error",
+                confirmText: "Ok",
+                onConfirm: () => navigate("/"),
+            });
         } finally {
             hideLoader();
         }

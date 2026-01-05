@@ -45,11 +45,19 @@ export default function EditPost() {
             const res = await axios.patch(`/api/posts/${id}`, post);
 
             editPost(res.data);
-            showNotification("Post edited successfully !!", "success", () =>
-                navigate("/")
-            );
+            showNotification({
+                message: "Post Successfully Edited !!",
+                type: "success",
+                confirmText: "Ok",
+                onConfirm: () => navigate("/"),
+            });
         } catch (err) {
-            showNotification(err?.message, "error", () => navigate("/"));
+            showNotification({
+                message: err?.message || "Something went wrong",
+                type: "error",
+                confirmText: "Ok",
+                onConfirm: () => navigate("/"),
+            });
         } finally {
             hideLoader();
         }

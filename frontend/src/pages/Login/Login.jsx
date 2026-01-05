@@ -28,13 +28,19 @@ export default function Login() {
             const { token, user } = response.data;
             login(token, user);
 
-            showNotification("Login Successful !!", "success", () =>
-                navigate("/")
-            );
+            showNotification({
+                message: "Login Successful !!",
+                type: "success",
+                confirmText: "Ok",
+                onConfirm: () => navigate("/"),
+            });
         } catch (err) {
-            showNotification(err?.response?.data?.error, "error", () =>
-                navigate("/login")
-            );
+            showNotification({
+                message: err?.response?.data?.error || "Something went wrong",
+                type: "error",
+                confirmText: "Ok",
+                onConfirm: () => navigate("/login"),
+            });
         } finally {
             hideLoader();
         }

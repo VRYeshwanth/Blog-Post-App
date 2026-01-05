@@ -23,13 +23,19 @@ export default function Register() {
                 password,
             });
 
-            showNotification("Registration Successful !!", "success", () =>
-                navigate("/login")
-            );
+            showNotification({
+                message: "Registration Successful !!",
+                type: "success",
+                confirmText: "Ok",
+                onConfirm: () => navigate("/"),
+            });
         } catch (err) {
-            showNotification(err?.response?.data?.error, "error", () =>
-                navigate("/register")
-            );
+            showNotification({
+                message: err?.response?.data?.error || "Something went wrong",
+                type: "error",
+                confirmText: "Ok",
+                onConfirm: () => navigate("/register"),
+            });
         } finally {
             hideLoader();
         }

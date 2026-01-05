@@ -29,9 +29,19 @@ export default function HomePage() {
         try {
             await axios.delete(`/api/posts/${id}`);
             deletePost(id);
-            showNotification("Post Deleted Successfully !!", "success");
+            showNotification({
+                message: "Post Successfully Deleted !!",
+                type: "success",
+                confirmText: "Ok",
+                onConfirm: () => navigate("/"),
+            });
         } catch (err) {
-            showNotification(err?.message, "error", () => navigate("/"));
+            showNotification({
+                message: err?.message || "Something went wrong",
+                type: "error",
+                confirmText: "Ok",
+                onConfirm: () => navigate("/"),
+            });
         } finally {
             hideLoader();
         }

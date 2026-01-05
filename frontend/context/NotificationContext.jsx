@@ -1,24 +1,44 @@
 import { createContext, useContext, useState } from "react";
 
 const NotificationContext = createContext();
+
 export const NotificationProvider = ({ children }) => {
     const [notification, setNotification] = useState({
         message: "",
         type: "info",
-        onClose: null,
+        title: null,
+        onConfirm: null,
+        confirmText: null,
+        cancelText: null,
     });
 
-    const showNotification = (message, type = "info", onClose = null) => {
+    const showNotification = ({
+        message,
+        type = "info",
+        title = null,
+        onConfirm = null,
+        confirmText = null,
+        cancelText = null,
+    }) => {
         setNotification({
-            message: message,
-            type: type,
-            onClose: onClose,
+            message,
+            type,
+            title,
+            onConfirm,
+            confirmText,
+            cancelText,
         });
     };
 
     const closeNotification = () => {
-        if (notification.onClose) notification.onClose();
-        setNotification({ message: "", type: "info", onClose: null });
+        setNotification({
+            message: "",
+            type: "info",
+            title: null,
+            onConfirm: null,
+            confirmText: null,
+            cancelText: null,
+        });
     };
 
     return (
