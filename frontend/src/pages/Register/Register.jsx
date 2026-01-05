@@ -27,7 +27,7 @@ export default function Register() {
                 message: "Registration Successful !!",
                 type: "success",
                 confirmText: "Ok",
-                onConfirm: () => navigate("/"),
+                onConfirm: () => navigate("/login"),
             });
         } catch (err) {
             showNotification({

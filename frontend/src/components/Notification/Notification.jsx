@@ -8,6 +8,15 @@ export default function Notification() {
 
     const isDanger = notification.type === "danger";
 
+    const handleConfirm = async () => {
+        const confirmFn = notification.onConfirm;
+        closeNotification();
+
+        if (typeof confirmFn === "function") {
+            await confirmFn();
+        }
+    };
+
     return (
         <div className={`notification ${notification.type}`}>
             <h2 className="notification-title">
@@ -31,22 +40,13 @@ export default function Notification() {
 
                             <button
                                 className="danger-btn"
-                                onClick={() => {
-                                    notification.onConfirm();
-                                    closeNotification();
-                                }}
+                                onClick={handleConfirm}
                             >
                                 {notification.confirmText || "Confirm"}
                             </button>
                         </>
                     ) : (
-                        <button
-                            className="close-btn"
-                            onClick={() => {
-                                notification.onConfirm();
-                                closeNotification();
-                            }}
-                        >
+                        <button className="close-btn" onClick={handleConfirm}>
                             {notification.confirmText || "Ok"}
                         </button>
                     )

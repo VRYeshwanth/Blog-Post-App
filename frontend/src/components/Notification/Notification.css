@@ -40,3 +40,25 @@
 .notification.error > .notification-btn > button:hover {
     background-color: var(--delete-hover);
 }
+
+.notification.danger .notification-btn {
+    gap: 0.8rem;
+}
+
+.notification.danger .cancel-btn {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
+
+.notification.danger .cancel-btn:hover {
+    background-color: var(--bg-hover);
+}
+
+.notification.danger .danger-btn {
+    background-color: #ff4242;
+}
+
+.notification.danger .danger-btn:hover {
+    background-color: #dc4a4a;
+}

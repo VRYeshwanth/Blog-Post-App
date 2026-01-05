@@ -18,6 +18,7 @@ app.use(
             "http://localhost:3000",
             "https://vryeshwanth.github.io",
         ],
+        credentials: true,
     })
 );
 app.use(express.json());
