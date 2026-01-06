@@ -24,13 +24,15 @@ export default function Register() {
             });
 
             showNotification({
-                message: "Registration Successful !!",
+                title: "Registration Successful",
+                message: "Your account has been created successfully.",
                 type: "success",
                 confirmText: "Ok",
                 onConfirm: () => navigate("/login"),
             });
         } catch (err) {
             showNotification({
+                title: "Registration Failed",
                 message: err?.response?.data?.error || "Something went wrong",
                 type: "error",
                 confirmText: "Ok",

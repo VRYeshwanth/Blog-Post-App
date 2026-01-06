@@ -46,13 +46,15 @@ export default function EditPost() {
 
             editPost(res.data);
             showNotification({
-                message: "Post Successfully Edited !!",
+                title: "Post Updated",
+                message: "Your changes have been saved.",
                 type: "success",
                 confirmText: "Ok",
                 onConfirm: () => navigate("/"),
             });
         } catch (err) {
             showNotification({
+                title: "Update Failed",
                 message: err?.message || "Something went wrong",
                 type: "error",
                 confirmText: "Ok",

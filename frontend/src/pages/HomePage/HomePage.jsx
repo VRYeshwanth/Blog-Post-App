@@ -30,13 +30,15 @@ export default function HomePage() {
             await axios.delete(`/api/posts/${id}`);
             deletePost(id);
             showNotification({
-                message: "Post Successfully Deleted !!",
+                title: "Post Deleted",
+                message: "The post has been deleted.",
                 type: "success",
                 confirmText: "Ok",
                 onConfirm: () => navigate("/"),
             });
         } catch (err) {
             showNotification({
+                title: "Deletion Failed",
                 message: err?.message || "Something went wrong",
                 type: "error",
                 confirmText: "Ok",

@@ -26,13 +26,15 @@ export default function CreatePost() {
             insertPost(response.data);
 
             showNotification({
-                message: "Post Successfully Created !!",
+                title: "Post Created",
+                message: "Your post has been published successfully.",
                 type: "success",
                 confirmText: "Ok",
                 onConfirm: () => navigate("/"),
             });
         } catch (err) {
             showNotification({
+                title: "Post Creation Failed",
                 message: err?.message || "Something went wrong",
                 type: "error",
                 confirmText: "Ok",

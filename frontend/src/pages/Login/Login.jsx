@@ -29,13 +29,15 @@ export default function Login() {
             login(token, user);
 
             showNotification({
-                message: "Login Successful !!",
+                title: "Login Successful",
+                message: "Welcome back! You’re now logged in.",
                 type: "success",
                 confirmText: "Ok",
                 onConfirm: () => navigate("/"),
             });
         } catch (err) {
             showNotification({
+                title: "Login Failed",
                 message: err?.response?.data?.error || "Something went wrong",
                 type: "error",
                 confirmText: "Ok",
